@@ -1,37 +1,30 @@
-import React from "react";
-import logo from "./assets/images/logo.svg";
+import React, { useEffect } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { setLeftNav, unsetLeftNav } from "@openmrs/esm-framework";
+import Home from "./home.component";
+import LeftPanel from "./components/left-panel/left-panel.component";
 import styles from "./root.scss";
 
 const Root: React.FC = () => {
-  return (
-    <div className={styles.container}>
-      <img alt="Uganda EMR logo" src={logo} width={300} height={200} />
-      <h1 className={styles.heading}>Welcome to the template app</h1>
-      <h2 className={styles.explainer}>
-        Use this template as a starter for set up custom UgandaEMR frontend
-        modules.
-      </h2>
-      <div className={styles.section}>
-        <p className={styles.subheading}>Next steps</p>
+  const spaBasePath = window.spaBase;
 
-        <ul className={styles.list}>
-          <li>
-            - Add components to the <b>src</b> directory.
-          </li>
-          <li>
-            - Read the{" "}
-            <a href="https://o3-docs.openmrs.org/docs/frontend-modules/overview">
-              frontend modules
-            </a>{" "}
-            and the{" "}
-            <a href="https://o3-docs.openmrs.org/docs/coding-conventions">
-              coding conventions
-            </a>{" "}
-            guides.
-          </li>
-        </ul>
-      </div>
-    </div>
+  useEffect(() => {
+    setLeftNav({
+      name: "health-exchange-left-panel-slot",
+      basePath: spaBasePath,
+    });
+    return () => unsetLeftNav("health-exchange-left-panel-slot");
+  }, [spaBasePath]);
+
+  return (
+    <BrowserRouter basename={`${window.getOpenmrsSpaBase()}health-exchange`}>
+      <LeftPanel />
+      <main className={styles.container}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </main>
+    </BrowserRouter>
   );
 };
 

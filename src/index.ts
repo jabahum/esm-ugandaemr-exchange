@@ -1,10 +1,11 @@
-import { getAsyncLifecycle, defineConfigSchema } from "@openmrs/esm-framework";
+import { getAsyncLifecycle, getSyncLifecycle, defineConfigSchema } from "@openmrs/esm-framework";
 import { configSchema } from "./config-schema";
+import { createDashboardLink } from "./create-dashboard-link.component";
 
-const moduleName = "@ugandaemr/esm-template-app";
+const moduleName = "@ugandaemr/esm-ugandaemr-exchange-app";
 
 const options = {
-  featureName: "root",
+  featureName: "health-exchange",
   moduleName,
 };
 
@@ -15,6 +16,14 @@ export const importTranslation = require.context(
   "lazy"
 );
 
+export const healthExchangeLink = getSyncLifecycle(
+  createDashboardLink({
+    name: "health-exchange",
+    slot: "health-exchange-dashboard-slot",
+    title: "Health Exchange",
+  }),
+  options
+);
 export function startupApp() {
   defineConfigSchema(moduleName, configSchema);
 }
