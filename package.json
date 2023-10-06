@@ -1,9 +1,9 @@
 {
-  "name": "@ugandaemr/esm-template-app",
+  "name": "@ugandaemr/esm-ugandaemr-exchange-app",
   "version": "1.0.0",
   "license": "MPL-2.0",
-  "description": "A template for creating frontend modules for UgandaEMR",
-  "browser": "dist/esm-ugandaemr-template-app.js",
+  "description": "A frontend module for Health Information Exchange in UgandaEMR",
+  "browser": "dist/esm-ugandaemr-exchange-app.js",
   "main": "src/index.ts",
   "source": true,
   "scripts": {

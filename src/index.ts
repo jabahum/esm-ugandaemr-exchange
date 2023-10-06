@@ -1,10 +1,16 @@
-import { getAsyncLifecycle, defineConfigSchema } from "@openmrs/esm-framework";
+import {
+  getAsyncLifecycle,
+  getSyncLifecycle,
+  defineConfigSchema,
+} from "@openmrs/esm-framework";
 import { configSchema } from "./config-schema";
+import { createDashboardLink } from "./create-dashboard-link.component";
+import { createLeftPanelLink } from "./left-panel-link.component";
 
-const moduleName = "@ugandaemr/esm-template-app";
+const moduleName = "@ugandaemr/esm-ugandaemr-exchange-app";
 
 const options = {
-  featureName: "root",
+  featureName: "health-exchange",
   moduleName,
 };
 
@@ -13,6 +19,31 @@ export const importTranslation = require.context(
   false,
   /.json$/,
   "lazy"
+);
+
+export const healthExchangeLink = getSyncLifecycle(
+  createDashboardLink({
+    name: "health-exchange",
+    slot: "health-exchange-dashboard-slot",
+    title: "Health Exchange",
+  }),
+  options
+);
+
+export const hieHomeLink = getSyncLifecycle(
+  createLeftPanelLink({
+    name: "",
+    title: "HIE Dashboard",
+  }),
+  options
+);
+
+export const fhirProfileLink = getSyncLifecycle(
+  createLeftPanelLink({
+    name: "fhir-profile",
+    title: "FHIR Profile",
+  }),
+  options
 );
 
 export function startupApp() {
