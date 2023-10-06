@@ -25,6 +25,16 @@
       "component": "root",
       "name": "health-exchange-dashboard",
       "slot": "health-exchange-dashboard-slot"
+    },
+    {
+      "component": "hieHomeLink",
+      "name": "hie-home-link",
+      "slot": "health-exchange-left-panel-slot"
+    },
+    {
+      "component": "fhirProfileLink",
+      "name": "fhir-profile-link",
+      "slot": "health-exchange-left-panel-slot"
     }
   ]
 }
