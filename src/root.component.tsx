@@ -4,6 +4,7 @@ import { setLeftNav, unsetLeftNav } from "@openmrs/esm-framework";
 import LeftPanel from "./components/left-panel/left-panel.component";
 import styles from "./root.scss";
 import Home from "./hie-dashboard/hie-dashboard.component";
+import Fhir from "./fhir/fhir.component";
 
 const Root: React.FC = () => {
   const spaBasePath = window.spaBase;
@@ -22,10 +23,7 @@ const Root: React.FC = () => {
       <main className={styles.container}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/fhir-profile"
-            element={<div> Home for FHIR Profile </div>}
-          />
+          <Route path="/fhir-exchange" element={<Fhir />} />
         </Routes>
       </main>
     </BrowserRouter>
