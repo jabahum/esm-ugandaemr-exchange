@@ -58,7 +58,6 @@ export const EditAction = () => {
         kind="ghost"
         renderIcon={Edit}
         hasIconOnly
-        onClick={() => {}}
       />
       <Button
         type="button"
@@ -68,7 +67,6 @@ export const EditAction = () => {
         kind="ghost"
         renderIcon={View}
         hasIconOnly
-        onClick={() => {}}
       />
     </>
   );
