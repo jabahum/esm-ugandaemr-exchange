@@ -46,4 +46,3 @@ export function mapDataElements(dataArray: Array<Record<string, string>>) {
 
   return arrayToReturn;
 }
-
