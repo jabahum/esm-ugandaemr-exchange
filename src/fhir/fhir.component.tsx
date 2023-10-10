@@ -36,7 +36,7 @@ const Fhir: React.FC = () => {
             <EmptyStateIllustration />
             <p className={fhirStyles.content}>No data to display</p>
             <p className={fhirStyles.explainer}>
-              Use the report filters above to build your reports
+              Use the create button to add new profiles
             </p>
           </Tile>
         </Layer>
