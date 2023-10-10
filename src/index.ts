@@ -41,7 +41,7 @@ export const hieHomeLink = getSyncLifecycle(
 export const fhirProfileLink = getSyncLifecycle(
   createLeftPanelLink({
     name: "fhir-exchange",
-    title: "FHIR Exchange",
+    title: "FHIR Profiles",
   }),
   options
 );
