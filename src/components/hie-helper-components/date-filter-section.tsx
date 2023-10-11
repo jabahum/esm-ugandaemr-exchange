@@ -7,7 +7,7 @@ import {
 } from "@carbon/react";
 import dayjs from "dayjs";
 import { formatDate } from "@openmrs/esm-framework";
-import styles from "./styles/hie-components.scss";
+import styles from "../../hie-dashboard/hie-dashboard.scss";
 
 const DateFilterInput = (props) => {
   const { setStartDate, setEndDate } = props;

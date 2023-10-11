@@ -1,0 +1,142 @@
+@use 'node_modules/@carbon/styles/scss/colors';
+@use 'node_modules/@carbon/styles/scss/spacing';
+@use 'node_modules/@carbon/styles/scss/type/index';
+@use '@carbon/styles/scss/type';
+@import "node_modules/@openmrs/esm-styleguide/src/vars";
+
+.gridContainer{
+  padding: 0;
+  margin: 0;
+  .gridChild{
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.upperDiv{
+  padding: 1rem 0 0 0;
+  margin: 1rem;
+  background-color: rgb(244, 244, 244);
+}
+
+.profileHeader{
+  @include type.type-style("heading-02");
+}
+.cardTile{
+  border: 0.0625rem solid #e0e0e0;
+  text-align: center;
+}
+
+.section{
+  padding: 1rem 0;
+  margin: 1rem 0 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.outGoingArrow {
+  color: $brand-primary-50;
+}
+
+.outGoingText {
+  color: $brand-primary-50;
+  @include type.type-style("label-02");
+}
+
+.inComingArrow {
+  color: $interactive-01;
+}
+
+.inComingText {
+  color: $interactive-01;
+  @include type.type-style("label-02");
+}
+
+.transactionsSection{
+  margin: 0.5rem 0 0 1rem;
+}
+
+.emptyState{
+  text-align: center;
+  padding: 4rem;
+  margin: 1rem;
+}
+
+.noTransactionTile{
+  text-align: center;
+  padding: 2rem;
+}
+
+.dateFilterSection{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  margin: 0 1rem;
+
+}
+
+.selectedPeriod{
+  width: fit-content;
+  display: flex;
+  align-items: center;
+}
+
+.dateRangeSelector{
+  width: fit-content;
+  margin: 0 7rem 0 auto;
+}
+
+.datePicker{
+  width: fit-content;
+  margin: 1rem 0.5rem 0 auto;
+
+  input{
+    background-color: #ffffff;
+  }
+}
+
+.fourDivCarousel {
+  width: 100%;
+  overflow: hidden;
+}
+
+.carouselContainer {
+  overflow: hidden;
+}
+
+.carouselContent {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.carouselItem {
+  width: 25%;
+  flex-shrink: 0;
+  padding: 2rem 2rem 2rem 2rem;
+}
+
+.carouselControlsContainer {
+  display: flex;
+}
+
+.carouselLeftControl {
+  position: absolute;
+  z-index: 2;
+  margin-top: 5rem;
+  margin-left: -0.5rem;
+}
+
+.carouselRightControl {
+  position: absolute;
+  margin-left: -3rem;
+  margin-top: 5rem;
+  z-index: 2;
+}
+
+.carouselRightControlDiv {
+  float: right;
+}
+
+
+
+

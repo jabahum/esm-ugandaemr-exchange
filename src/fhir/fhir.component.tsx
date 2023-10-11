@@ -2,12 +2,12 @@ import React from "react";
 import Header from "../components/header/header.component";
 import Illustration from "./fhir-illustration.component";
 import fhirStyles from "./fhir.scss";
-import { Button, Layer, Tile } from "@carbon/react";
+import { Button } from "@carbon/react";
 import { Add, Edit, View } from "@carbon/react/icons";
 import { useGetFhirProfiles } from "./fhir.resource";
 import { fhirTableHeaders } from "../constants";
 import DataList from "../components/data-table/data-table.component";
-import EmptyStateIllustration from "../components/empty-state/empty-state-illustration.component";
+import { EmptyStateComponent } from "../components/empty-state/empty-state.component";
 
 const Fhir: React.FC = () => {
   const { fhirProfiles } = useGetFhirProfiles();
@@ -31,15 +31,9 @@ const Fhir: React.FC = () => {
           <DataList data={fhirProfiles} columns={fhirTableHeaders} />
         </div>
       ) : (
-        <Layer className={fhirStyles.layer}>
-          <Tile className={fhirStyles.tile}>
-            <EmptyStateIllustration />
-            <p className={fhirStyles.content}>No data to display</p>
-            <p className={fhirStyles.explainer}>
-              Use the create button to add new profiles
-            </p>
-          </Tile>
-        </Layer>
+        <EmptyStateComponent
+          title={`Use the create button to add new profiles`}
+        />
       )}
     </>
   );

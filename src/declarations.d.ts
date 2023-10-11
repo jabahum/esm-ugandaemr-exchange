@@ -38,3 +38,38 @@ declare type fhirProfile = {
   links?: Array<link>;
   actions: any;
 };
+
+declare type SyncTaskType = {
+  uuid: string;
+  name: string;
+};
+
+declare type SyncFHIRProfile = {
+  uuid: string;
+  name: string;
+};
+
+declare type TransactionCount = {
+  count: number;
+};
+
+declare type HIEProfilesInterface = {
+  alis: ProfileInterface;
+  artAccess: ProfileInterface;
+  cbs: ProfileInterface;
+  clientRegistry: ProfileInterface;
+  ecbs: ProfileInterface;
+  ehmis: ProfileInterface;
+  facilitySHR: ProfileInterface;
+  pirs: ProfileInterface;
+  smsReminders: ProfileInterface;
+  viralLoad: ProfileInterface;
+};
+
+declare type ProfileInterface = {
+  name: string;
+  incomingCount?: number;
+  outgoingCount?: number;
+  incoming?: [];
+  outgoing?: [];
+};

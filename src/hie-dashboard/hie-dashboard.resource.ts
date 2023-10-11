@@ -1,7 +1,6 @@
 import { openmrsFetch } from "@openmrs/esm-framework";
 import dayjs from "dayjs";
 import useSWR from "swr";
-import { SyncFHIRProfile, SyncTaskType } from "./hie.types";
 import {
   ART_ACCESS_OUTGOING_SYNC_FHIR_PROFILE_UUID,
   CBS_OUTGOING_SYNC_FHIR_PROFILE_UUID,
@@ -15,7 +14,7 @@ import {
   PIRS_REPORTING_OUTGOING_SYNC_TASK_TYPE_UUID,
   EHMIS_REPORTING_OUTGOING_SYNC_TASK_TYPE_UUID,
   SMS_APPOINTMENT_REMINDERS_OUTGOING_SYNC_TASK_TYPE_UUID,
-} from "./constants/hie-constants";
+} from "../constants";
 
 export function useFetchSyncFhirProfiles() {
   const apiURL = "ws/rest/v1/syncfhirprofile?v=custom:(uuid,name)";
