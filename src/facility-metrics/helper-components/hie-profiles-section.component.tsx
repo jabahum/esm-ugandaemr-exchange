@@ -4,14 +4,14 @@ import { showNotification } from "@openmrs/esm-framework";
 import { DateFilterSection } from "./date-filter-section";
 import { ProfileCard } from "./profile-card";
 import ProfileTransactionsSection from "./profile-transactions";
-import styles from "../../hie-dashboard/hie-dashboard.scss";
+import styles from "../hie-metrics/hie-dashboard.scss";
 import {
   fetchTransactionCount,
   findProfileKey,
   findTaskKey,
   useFetchSyncFhirProfiles,
   useFetchSyncTaskTypes,
-} from "../../hie-dashboard/hie-dashboard.resource";
+} from "../facility-metrics.resource";
 import {
   HIEProfiles,
   syncFhirProfileUuids,

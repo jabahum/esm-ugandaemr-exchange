@@ -15,7 +15,7 @@ import {
   TabPanel,
   TabPanels,
 } from "@carbon/react";
-import styles from "../../hie-dashboard/hie-dashboard.scss";
+import styles from "../hie-metrics/hie-dashboard.scss";
 
 const headers = [
   { key: "dateOfRequest", header: "Date of Request" },

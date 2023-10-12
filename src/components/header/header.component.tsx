@@ -18,9 +18,9 @@ const Header: React.FC<{
         <div className={styles["left-justified-items"]}>
           {illustrationComponent}
           <div className={styles["page-labels"]}>
-            <p>{t("home", "HIE")}</p>
+            <p>{t("facility", "Facility")}</p>
             <p className={styles["page-name"]}>
-              {title ?? t("healthExchange", "Health exchange")}
+              {title ?? t("healthExchange", "Facility")}
             </p>
           </div>
         </div>

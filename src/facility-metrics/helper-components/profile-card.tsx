@@ -1,31 +1,20 @@
 import React from "react";
 import { ClickableTile } from "@carbon/react";
 import { ArrowUp, ArrowDown } from "@carbon/react/icons";
-import profileStyles from "../../hie-dashboard/hie-dashboard.scss";
+import profileStyles from "../hie-metrics/hie-dashboard.scss";
 
-export const ProfileCard = ({
-  id,
-  profileName,
-  incoming,
-  outgoing,
-  setSelectedTile,
-  color,
-}) => {
+export const ProfileCard = ({ profile, onClickHandler }) => {
   return (
     <ClickableTile
-      onClick={(e) => {
-        e.preventDefault();
-        setSelectedTile(profileName);
-      }}
+      onClick={() => onClickHandler(profile)}
       className={profileStyles.cardTile}
-      style={{ backgroundColor: color }}
-      id={id}
+      id={profile.uuid}
     >
-      <p className={profileStyles.profileHeader}>{profileName}</p>
+      <p className={profileStyles.profileHeader}>{profile.name}</p>
       <section className={profileStyles.section}>
         <div>
           <p className={profileStyles.label}>
-            {incoming}
+            {10}
             <ArrowDown size={15} className={profileStyles.inComingArrow} />
           </p>
           <span className={profileStyles.inComingText}>Incoming</span>
@@ -33,7 +22,7 @@ export const ProfileCard = ({
         <div className={profileStyles.valueContainer}>
           <p className={profileStyles.label}>
             <ArrowUp size={15} className={profileStyles.outGoingArrow} />
-            {outgoing}
+            {5}
           </p>
           <span className={profileStyles.outGoingText}>Outgoing</span>
         </div>

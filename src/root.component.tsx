@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { setLeftNav, unsetLeftNav } from "@openmrs/esm-framework";
 import LeftPanel from "./components/left-panel/left-panel.component";
 import styles from "./root.scss";
-import HIEDashboard from "./hie-dashboard/hie-dashboard.component";
 import Fhir from "./fhir/fhir.component";
+import FacilityMetrics from "./facility-metrics/facility-metrics.component";
 
 const Root: React.FC = () => {
   const spaBasePath = window.spaBase;
@@ -22,7 +22,7 @@ const Root: React.FC = () => {
       <LeftPanel />
       <main className={styles.container}>
         <Routes>
-          <Route path="/" element={<HIEDashboard />} />
+          <Route path="/" element={<FacilityMetrics />} />
           <Route path="/fhir-exchange" element={<Fhir />} />
         </Routes>
       </main>

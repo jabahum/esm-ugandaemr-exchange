@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@carbon/react";
 import { ChevronLeft, ChevronRight } from "@carbon/react/icons";
-import { ProfileCard } from "../components/hie-helper-components/profile-card";
+import { ProfileCard } from "../helper-components/profile-card";
 import styles from "./hie-dashboard.scss";
-import { useGetFhirProfiles } from "../fhir/fhir.resource";
-import Header from "../components/header/header.component";
-import Illustration from "./hie-illustration.component";
-import { EmptyStateComponent } from "../components/empty-state/empty-state.component";
+import { useGetFhirProfiles } from "../../fhir/fhir.resource";
+import { EmptyStateComponent } from "../../components/empty-state/empty-state.component";
 
 const HIEDashboard: React.FC = () => {
-  const [selectedTile, setSelectedTile] = useState(null);
+  const [selectedProfile, setSelectedProfile] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [maxIndex, setMaxIndex] = useState(0);
   const { fhirProfiles } = useGetFhirProfiles();
@@ -35,6 +33,10 @@ const HIEDashboard: React.FC = () => {
     setCurrentIndex(newIndex);
   };
 
+  const handleSelectedProfile = (profile) => {
+    setSelectedProfile(profile);
+  };
+
   useEffect(() => {
     if (fhirProfiles.length > 0) {
       const index: number = fhirProfiles.length / 4;
@@ -52,11 +54,6 @@ const HIEDashboard: React.FC = () => {
 
   return (
     <>
-      <Header
-        illustrationComponent={<Illustration />}
-        title={`HIE Dashboard`}
-      />
-
       <div className={styles.fourDivCarousel}>
         <div className={styles.carouselContainer}>
           <Button
@@ -85,20 +82,19 @@ const HIEDashboard: React.FC = () => {
             {fhirProfiles?.map((fhirProfile, index) => (
               <div className={styles.carouselItem} key={index}>
                 <ProfileCard
-                  id={fhirProfile.uuid}
-                  profileName={fhirProfile.name}
-                  incoming={10}
-                  outgoing={5}
-                  setSelectedTile={setSelectedTile}
-                  color={`"#e0e0e0"`}
+                  profile={fhirProfile}
+                  onClickHandler={handleSelectedProfile}
                 />
               </div>
             ))}
           </div>
         </div>
       </div>
-
-      <EmptyStateComponent title={`Click on one of the profiles above`} />
+      {selectedProfile ? (
+        <div></div>
+      ) : (
+        <EmptyStateComponent title={`Click on one of the profiles above`} />
+      )}
     </>
   );
 };

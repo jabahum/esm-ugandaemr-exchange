@@ -39,6 +39,12 @@ declare type fhirProfile = {
   actions: any;
 };
 
+declare type exchangeProfile = {
+  uuid: string;
+  name: string;
+  type: "fhirProfile" | "syncTask";
+};
+
 declare type SyncTaskType = {
   uuid: string;
   name: string;
