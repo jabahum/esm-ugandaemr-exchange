@@ -13,43 +13,41 @@
   }
 }
 
-.upperDiv{
+.upperDiv {
   padding: 1rem 0 0 0;
   margin: 1rem;
   background-color: rgb(244, 244, 244);
 }
 
-.profileHeader{
+.profileHeader {
   @include type.type-style("heading-02");
 }
-.cardTile{
+
+.cardTile {
   border: 0.0625rem solid #e0e0e0;
-  text-align: center;
+  border-radius: 1rem
 }
 
-.section{
-  padding: 1rem 0;
-  margin: 1rem 0 0 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.cardWrapper{
+  display: flex;
+  justify-content: space-between;
 }
 
 .outGoingArrow {
   color: $brand-primary-50;
 }
 
-.outGoingText {
-  color: $brand-primary-50;
-  @include type.type-style("label-02");
-}
-
 .inComingArrow {
   color: $interactive-01;
 }
 
-.inComingText {
-  color: $interactive-01;
-  @include type.type-style("label-02");
+.profileName {
+  padding-top: 1rem;
+}
+
+.profileStats {
+  //display: flex;
+  //justify-content: space-between;
 }
 
 .transactionsSection{
@@ -68,11 +66,10 @@
 }
 
 .dateFilterSection{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  //display: grid;
+  //grid-template-columns: 1fr 1fr;
   width: 100%;
-  margin: 0 1rem;
-
+  margin: -1rem 0 1rem 0;
 }
 
 .selectedPeriod{
@@ -93,6 +90,10 @@
   input{
     background-color: #ffffff;
   }
+
+  :global(.cds--date-picker-container) {
+    margin-right: 1rem !important;
+  }
 }
 
 .fourDivCarousel {
@@ -110,9 +111,13 @@
 }
 
 .carouselItem {
-  width: 25%;
+  width: 12.5%;
   flex-shrink: 0;
-  padding: 2rem 2rem 2rem 2rem;
+  padding:  0 1.5rem 0 1.5rem;
+
+  :global(.cds--tile) {
+    background-color: transparent;
+  }
 }
 
 .carouselControlsContainer {
@@ -122,14 +127,14 @@
 .carouselLeftControl {
   position: absolute;
   z-index: 2;
-  margin-top: 5rem;
-  margin-left: -0.5rem;
+  margin-top: 1.5rem;
+  margin-left: -0.7rem;
 }
 
 .carouselRightControl {
   position: absolute;
-  margin-left: -3rem;
-  margin-top: 5rem;
+  margin-left: -2.3rem;
+  margin-top: 1.5rem;
   z-index: 2;
 }
 
@@ -137,6 +142,15 @@
   float: right;
 }
 
+.firstItem {
+  padding-bottom: 1.4rem;
+  display: flex;
+}
 
+.secondItem {
+  display: flex;
+  padding-left: 11px;
+  padding-top: 5px;
+}
 
 

@@ -31,39 +31,6 @@ export const fhirTableHeaders = [
   },
 ];
 
-export const ExchangeProfiles: Array<exchangeProfile> = [
-  {
-    uuid: "0a7fff77-6ac7-416c-831e-4e3f1f2c853b",
-    name: "ART ACCESS",
-    type: "fhirProfile",
-  },
-  {
-    uuid: "0a7fff77-6ac7-416c-831e-4e3f1f2c853b",
-    name: "ALIS",
-    type: "fhirProfile",
-  },
-  {
-    uuid: "0a7fff77-6ac7-416c-831e-4e3f1f2c853b",
-    name: "eCBSS",
-    type: "fhirProfile",
-  },
-  {
-    uuid: "0a7fff77-6ac7-416c-831e-4e3f1f2c853b",
-    name: "PIRS",
-    type: "fhirProfile",
-  },
-  {
-    uuid: "0a7fff77-6ac7-416c-831e-4e3f1f2c853b",
-    name: "eHMIS",
-    type: "fhirProfile",
-  },
-  {
-    uuid: "0a7fff77-6ac7-416c-831e-4e3f1f2c853b",
-    name: "CBS",
-    type: "fhirProfile",
-  },
-];
-
 export const HIEProfiles = {
   alis: { name: "ALIS" },
   artAccess: { name: "ART Access" },

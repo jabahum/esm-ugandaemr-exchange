@@ -6,13 +6,6 @@ import { ProfileCard } from "./profile-card";
 import ProfileTransactionsSection from "./profile-transactions";
 import styles from "../hie-metrics/hie-dashboard.scss";
 import {
-  fetchTransactionCount,
-  findProfileKey,
-  findTaskKey,
-  useFetchSyncFhirProfiles,
-  useFetchSyncTaskTypes,
-} from "../facility-metrics.resource";
-import {
   HIEProfiles,
   syncFhirProfileUuids,
   syncTaskTypeUuids,

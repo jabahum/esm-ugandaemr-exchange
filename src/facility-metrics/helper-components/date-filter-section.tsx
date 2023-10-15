@@ -10,20 +10,12 @@ import { formatDate } from "@openmrs/esm-framework";
 import styles from "../hie-metrics/hie-dashboard.scss";
 
 const DateFilterInput = (props) => {
-  const { setStartDate, setEndDate } = props;
+  // const { setStartDate, setEndDate } = props;
   return (
     <DatePicker
       datePickerType="range"
       className={styles.datePicker}
       aria-label="Date Range Filter"
-      onChange={(event) => {
-        if (event.length === 1) {
-          setStartDate(event[0]);
-        } else if (event.length === 2) {
-          setStartDate(event[0]);
-          setEndDate(event[1]);
-        }
-      }}
     >
       <DatePickerInput
         id="date-picker-input-id-start"
@@ -42,48 +34,26 @@ const DateFilterInput = (props) => {
 };
 
 export const DateFilterSection = (props) => {
-  const { startDate, endDate, setStartDate, setEndDate } = props;
+  // const { startDate, endDate, setStartDate, setEndDate } = props;
   const [dateRangeSelection, setDateRangeSelection] = useState("today");
   const [showDateFilter, setShowDateFilter] = useState(false);
-  const formattedStartDate = formatDate(startDate, {
-    time: false,
-    noToday: true,
-  });
-  const formattedEndDate = formatDate(endDate, {
-    time: false,
-    noToday: true,
-  });
-  const dateRange =
-    dayjs(startDate).diff(dayjs(endDate)) === 0
-      ? `${formattedStartDate}`
-      : `${formattedStartDate} to ${formattedEndDate}`;
-
-  useEffect(() => {
-    if (dateRangeSelection === "today") {
+  const handleOnchangeSelector = (value) => {
+    if (value === "today") {
       setShowDateFilter(false);
-    } else if (dateRangeSelection === "custom range") {
+    } else {
       setShowDateFilter(true);
     }
-  }, [dateRangeSelection]);
-
-  useEffect(() => {
-    if (dateRangeSelection === "today") {
-      setStartDate(new Date());
-      setEndDate(new Date());
-    }
-  }, [dateRangeSelection, setEndDate, setStartDate]);
+    setDateRangeSelection(value);
+  };
   return (
     <>
       <div className={styles.dateFilterSection}>
-        <p className={styles.selectedPeriod}>
-          Profile information for {dateRange}
-        </p>
         <div className={styles.dateRangeSelector}>
           <RadioButtonGroup
             legendText=""
             name="radio-button-group"
             defaultSelected="today"
-            onChange={(value) => setDateRangeSelection(value)}
+            onChange={handleOnchangeSelector}
             hideLabel={true}
           >
             <RadioButton
@@ -99,16 +69,7 @@ export const DateFilterSection = (props) => {
           </RadioButtonGroup>
         </div>
       </div>
-      {showDateFilter ? (
-        <DateFilterInput
-          setStartDate={setStartDate}
-          setEndDate={setEndDate}
-          startDate={startDate}
-          endDate={endDate}
-        />
-      ) : (
-        ""
-      )}
+      {showDateFilter ? <DateFilterInput /> : null}
     </>
   );
 };

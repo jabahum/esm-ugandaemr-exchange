@@ -10,23 +10,24 @@ export const ProfileCard = ({ profile, onClickHandler }) => {
       className={profileStyles.cardTile}
       id={profile.uuid}
     >
-      <p className={profileStyles.profileHeader}>{profile.name}</p>
-      <section className={profileStyles.section}>
-        <div>
-          <p className={profileStyles.label}>
-            {10}
-            <ArrowDown size={15} className={profileStyles.inComingArrow} />
-          </p>
-          <span className={profileStyles.inComingText}>Incoming</span>
+      <>
+        <div className={profileStyles.cardWrapper}>
+          <div>
+            {profile.icon}
+            <div className={profileStyles.profileName}>{profile.name}</div>
+          </div>
+          <div className={profileStyles.profileStats}>
+            <div className={profileStyles.firstItem}>
+              <ArrowDown size={15} className={profileStyles.inComingArrow} />
+              <div>{profile?.incoming?.count}</div>
+            </div>
+            <div className={profileStyles.secondItem}>
+              <div>{profile?.outgoing?.count}</div>
+              <ArrowUp size={15} className={profileStyles.outGoingArrow} />
+            </div>
+          </div>
         </div>
-        <div className={profileStyles.valueContainer}>
-          <p className={profileStyles.label}>
-            <ArrowUp size={15} className={profileStyles.outGoingArrow} />
-            {5}
-          </p>
-          <span className={profileStyles.outGoingText}>Outgoing</span>
-        </div>
-      </section>
+      </>
     </ClickableTile>
   );
 };

@@ -43,6 +43,9 @@ declare type exchangeProfile = {
   uuid: string;
   name: string;
   type: "fhirProfile" | "syncTask";
+  icon: any;
+  incoming?: Record<string, any>;
+  outgoing?: Record<string, any>;
 };
 
 declare type SyncTaskType = {

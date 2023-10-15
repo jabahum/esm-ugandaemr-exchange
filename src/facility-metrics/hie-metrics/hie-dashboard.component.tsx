@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "@carbon/react";
 import { ChevronLeft, ChevronRight } from "@carbon/react/icons";
 import { ProfileCard } from "../helper-components/profile-card";
 import styles from "./hie-dashboard.scss";
-import { useGetFhirProfiles } from "../../fhir/fhir.resource";
 import { EmptyStateComponent } from "../../components/empty-state/empty-state.component";
+import { useGetProfiles } from "../facility-metrics.resource";
+import { DateFilterSection } from "../helper-components/date-filter-section";
 
 const HIEDashboard: React.FC = () => {
+  const { exchangeProfiles, maxPosition } = useGetProfiles();
   const [selectedProfile, setSelectedProfile] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [maxIndex, setMaxIndex] = useState(0);
-  const { fhirProfiles } = useGetFhirProfiles();
+  const [maxIndex] = useState(maxPosition);
   const moveRight = () => {
     let newIndex: number;
     if (currentIndex + 1 <= maxIndex) {
@@ -37,23 +38,9 @@ const HIEDashboard: React.FC = () => {
     setSelectedProfile(profile);
   };
 
-  useEffect(() => {
-    if (fhirProfiles.length > 0) {
-      const index: number = fhirProfiles.length / 4;
-      const mod = fhirProfiles.length % 4;
-      let newIndex = 0;
-      if (mod >= 1 && mod <= 3) {
-        newIndex = index;
-      } else {
-        newIndex = index - 1;
-      }
-
-      setMaxIndex(newIndex);
-    }
-  }, [maxIndex, fhirProfiles]);
-
   return (
     <>
+      <DateFilterSection />
       <div className={styles.fourDivCarousel}>
         <div className={styles.carouselContainer}>
           <Button
@@ -79,7 +66,7 @@ const HIEDashboard: React.FC = () => {
             className={styles.carouselContent}
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
-            {fhirProfiles?.map((fhirProfile, index) => (
+            {exchangeProfiles?.map((fhirProfile, index) => (
               <div className={styles.carouselItem} key={index}>
                 <ProfileCard
                   profile={fhirProfile}
