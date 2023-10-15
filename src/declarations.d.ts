@@ -43,9 +43,17 @@ declare type exchangeProfile = {
   uuid: string;
   name: string;
   type: "fhirProfile" | "syncTask";
-  icon: any;
-  incoming?: Record<string, any>;
-  outgoing?: Record<string, any>;
+  icon: JSX.Element;
+  incoming?: {
+    url?: string;
+    count?: number;
+    type?: string;
+  };
+  outgoing?: {
+    url?: string;
+    count?: number;
+    type?: string;
+  };
 };
 
 declare type SyncTaskType = {
