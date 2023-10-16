@@ -21,6 +21,7 @@ const HIEDashboard: React.FC = () => {
   const [selectedProfile, setSelectedProfile] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showProfileLoader, setShowProfileLoader] = useState(false);
+  const [showTransactionLoader, setShowTransactionLoader] = useState(false);
   const [profileTransactions, setProfileTransactions] = useState<
     Array<ProfileTransactions>
   >([]);
@@ -56,6 +57,8 @@ const HIEDashboard: React.FC = () => {
 
   const handleSelectedProfile = useCallback(
     (profile) => {
+      setShowTransactionLoader(true);
+
       fetchTransactions(
         profile.outgoing.url,
         dateArray[0],
@@ -66,12 +69,14 @@ const HIEDashboard: React.FC = () => {
           const transactions = mapDataElements(response?.data["results"]);
           setProfileTransactions(transactions);
           setSelectedProfile(profile);
+          setShowTransactionLoader(false);
         })
         .catch((error) => {
           console.error("Error fetching transactions:", error);
+          setShowTransactionLoader(false);
         });
     },
-    [dateArray, setSelectedProfile]
+    [dateArray, setSelectedProfile, setShowTransactionLoader]
   );
 
   const handleOnchangeSelector = (value) => {
@@ -186,7 +191,9 @@ const HIEDashboard: React.FC = () => {
           </div>
         </div>
       )}
-      {selectedProfile ? (
+      {showTransactionLoader ? (
+        <DataTableSkeleton />
+      ) : selectedProfile ? (
         profileTransactions.length > 0 ? (
           <DataList
             data={profileTransactions}
