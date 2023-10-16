@@ -119,6 +119,14 @@
   :global(.cds--tile) {
     background-color: transparent;
   }
+
+  :global(.cds--tile--clickable:hover) {
+    background-color: $field-01;
+  }
+
+  .selected {
+    background-color: $field-01;
+  }
 }
 
 .carouselControlsContainer {

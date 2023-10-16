@@ -3,11 +3,11 @@ import { ClickableTile } from "@carbon/react";
 import { ArrowUp, ArrowDown } from "@carbon/react/icons";
 import profileStyles from "../hie-metrics/hie-dashboard.scss";
 
-export const ProfileCard = ({ profile, onClickHandler }) => {
+export const ProfileCard = ({ profile, onClickHandler, selectedClass }) => {
   return (
     <ClickableTile
       onClick={() => onClickHandler(profile)}
-      className={profileStyles.cardTile}
+      className={`${profileStyles.cardTile} ${selectedClass}`}
       id={profile.uuid}
     >
       <>

@@ -1,21 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Button } from "@carbon/react";
 import { ChevronLeft, ChevronRight } from "@carbon/react/icons";
 import { ProfileCard } from "../helper-components/profile-card";
 import styles from "./hie-dashboard.scss";
 import { EmptyStateComponent } from "../../components/empty-state/empty-state.component";
 import {
+  fetchTransactions,
   fetchTransactionCount,
   getProfiles,
+  mapDataElements,
 } from "../facility-metrics.resource";
 import { DateFilterSection } from "../helper-components/date-filter-section";
 import dayjs from "dayjs";
+import { profileTransactionsHeaders } from "../../constants";
+import DataList from "../../components/data-table/data-table.component";
 
 const HIEDashboard: React.FC = () => {
   const [dateRangeSelection, setDateRangeSelection] = useState("today");
   const [showDateFilter, setShowDateFilter] = useState(false);
   const [selectedProfile, setSelectedProfile] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [profileTransactions, setProfileTransactions] = useState<
+    Array<ProfileTransactions>
+  >([]);
   const [dateArray, setDateArray] = useState([
     dayjs(new Date()).format("YYYY-MM-DD"),
     dayjs(new Date()).format("YYYY-MM-DD"),
@@ -46,9 +53,25 @@ const HIEDashboard: React.FC = () => {
     setCurrentIndex(newIndex);
   };
 
-  const handleSelectedProfile = (profile) => {
-    setSelectedProfile(profile);
-  };
+  const handleSelectedProfile = useCallback(
+    (profile) => {
+      fetchTransactions(
+        profile.outgoing.url,
+        dateArray[0],
+        dateArray[1],
+        profile.outgoing.type
+      )
+        .then((response) => {
+          const transactions = mapDataElements(response?.data["results"]);
+          setProfileTransactions(transactions);
+          setSelectedProfile(profile);
+        })
+        .catch((error) => {
+          console.error("Error fetching transactions:", error);
+        });
+    },
+    [dateArray, setSelectedProfile]
+  );
 
   const handleOnchangeSelector = (value) => {
     if (value === "today") {
@@ -147,6 +170,9 @@ const HIEDashboard: React.FC = () => {
                 <ProfileCard
                   profile={fhirProfile}
                   onClickHandler={handleSelectedProfile}
+                  selectedClass={
+                    selectedProfile === fhirProfile ? styles.selected : ""
+                  }
                 />
               </div>
             ))}
@@ -154,7 +180,16 @@ const HIEDashboard: React.FC = () => {
         </div>
       </div>
       {selectedProfile ? (
-        <div></div>
+        profileTransactions.length > 0 ? (
+          <DataList
+            data={profileTransactions}
+            columns={profileTransactionsHeaders}
+          />
+        ) : (
+          <EmptyStateComponent
+            title={`No data found for the selected period`}
+          />
+        )
       ) : (
         <EmptyStateComponent title={`Click on one of the profiles above`} />
       )}

@@ -70,6 +70,14 @@ declare type TransactionCount = {
   count: number;
 };
 
+declare type ProfileTransactions = {
+  name: string;
+  identifier: string;
+  status: string;
+  statuCode?: string;
+  dateCreated: string;
+}
+
 declare type HIEProfilesInterface = {
   alis: ProfileInterface;
   artAccess: ProfileInterface;

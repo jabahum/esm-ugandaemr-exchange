@@ -1,21 +1,23 @@
 import React from "react";
-import { openmrsFetch } from "@openmrs/esm-framework";
+import { openmrsFetch, restBaseUrl } from "@openmrs/esm-framework";
 import {
   BuildingInsights_2,
+  Chat,
+  Collaborate,
   DataCenter,
   Datastore,
   Db2Database,
-  Chat,
-  Collaborate,
   GroupAccess,
   IbmMq,
-  LogicalPartition,
   LoadBalancerPool,
+  LogicalPartition,
   Microscope,
-  Rss,
   Product,
+  Rss,
 } from "@carbon/react/icons";
 import useSWR from "swr";
+import { EditAction } from "../fhir/fhir.component";
+import profileTransactions from "./helper-components/profile-transactions";
 
 export function useFetchSyncFhirProfiles() {
   const apiURL = "ws/rest/v1/syncfhirprofile?v=custom:(uuid,name)";
@@ -56,8 +58,8 @@ export async function fetchTransactionCount(
   const abortController = new AbortController();
   const apiURL =
     type === "fhirProfile"
-      ? "/ws/rest/v1/syncfhirresourcestats?profile"
-      : "/ws/rest/v1/synctaskstats?type";
+      ? `${restBaseUrl}syncfhirresourcestats?profile`
+      : `${restBaseUrl}synctaskstats?type`;
 
   const response = await openmrsFetch(
     `${apiURL}=${uuid}&startDate=${startDate}&endDate=${endDate}`,
@@ -66,6 +68,26 @@ export async function fetchTransactionCount(
     }
   );
   return response.json();
+}
+
+export async function fetchTransactions(
+  uuid: string,
+  startDate,
+  endDate,
+  type = "fhirProfile" || "syncTask"
+) {
+  const abortController = new AbortController();
+  const apiURL =
+    type === "fhirProfile"
+      ? `${restBaseUrl}syncfhirresourcestats?profile`
+      : `${restBaseUrl}synctaskdetails?synctasktype`;
+
+  return await openmrsFetch(
+    `${apiURL}=${uuid}&startDate=${startDate}&endDate=${endDate}`,
+    {
+      signal: abortController.signal,
+    }
+  );
 }
 
 export function getProfiles() {
@@ -295,4 +317,20 @@ export function getProfiles() {
     exchangeProfiles: profiles,
     maxPosition: maxIndex,
   };
+}
+
+export function mapDataElements(dataArray: Array<Record<string, string>>) {
+  const arrayToReturn: Array<ProfileTransactions> = [];
+  if (dataArray) {
+    dataArray.map((profile: Record<string, any>) => {
+      arrayToReturn.push({
+        name: profile.name,
+        identifier: profile.identifier,
+        status: profile.status,
+        dateCreated: profile.dateCreated,
+      });
+    });
+  }
+
+  return arrayToReturn;
 }
