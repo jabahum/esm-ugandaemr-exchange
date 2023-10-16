@@ -10,14 +10,12 @@ import {
   getProfiles,
   mapDataElements,
 } from "../facility-metrics.resource";
-import { DateFilterSection } from "../helper-components/date-filter-section";
+import { DateFilterInput } from "../helper-components/date-filter-section";
 import dayjs from "dayjs";
 import { profileTransactionsHeaders } from "../../constants";
 import DataList from "../../components/data-table/data-table.component";
 
 const HIEDashboard: React.FC = () => {
-  const [dateRangeSelection, setDateRangeSelection] = useState("today");
-  const [showDateFilter, setShowDateFilter] = useState(false);
   const [selectedProfile, setSelectedProfile] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showProfileLoader, setShowProfileLoader] = useState(false);
@@ -25,10 +23,7 @@ const HIEDashboard: React.FC = () => {
   const [profileTransactions, setProfileTransactions] = useState<
     Array<ProfileTransactions>
   >([]);
-  const [dateArray, setDateArray] = useState([
-    dayjs(new Date()).format("YYYY-MM-DD"),
-    dayjs(new Date()).format("YYYY-MM-DD"),
-  ]);
+  const [dateArray, setDateArray] = useState([new Date(), new Date()]);
   const [willUpdateTransactions, setWillUpdateTransactions] = useState(true);
   const { exchangeProfiles, maxPosition } = getProfiles();
   const [maxIndex] = useState(maxPosition);
@@ -61,8 +56,8 @@ const HIEDashboard: React.FC = () => {
 
       fetchTransactions(
         profile.outgoing.url,
-        dateArray[0],
-        dateArray[1],
+        dayjs(dateArray[0]).format("YYYY-MM-DD"),
+        dayjs(dateArray[1]).format("YYYY-MM-DD"),
         profile.outgoing.type
       )
         .then((response) => {
@@ -79,31 +74,12 @@ const HIEDashboard: React.FC = () => {
     [dateArray, setSelectedProfile, setShowTransactionLoader]
   );
 
-  const handleOnchangeSelector = (value) => {
-    if (value === "today") {
-      setDateArray([
-        dayjs(new Date()).format("YYYY-MM-DD"),
-        dayjs(new Date()).format("YYYY-MM-DD"),
-      ]);
-      setShowDateFilter(false);
-      setWillUpdateTransactions(true);
-    } else {
-      setShowDateFilter(true);
-    }
-    setDateRangeSelection(value);
-  };
-
-  const handleOnChangeRange = (dates) => {
+  const handleOnChangeRange = (dates: Array<Date>) => {
     setDateArray(dates);
   };
 
-  const useUpdateTransactions = () => {
-    const newDates = [
-      dayjs(dateArray[0]).format("YYYY-MM-DD"),
-      dayjs(dateArray[1]).format("YYYY-MM-DD"),
-    ];
+  const updateTransactions = () => {
     setWillUpdateTransactions(true);
-    setDateArray(newDates);
     setShowProfileLoader(true);
   };
 
@@ -115,14 +91,14 @@ const HIEDashboard: React.FC = () => {
         updatedProfiles.map(async (profile) => {
           const incomingCount = await fetchTransactionCount(
             profile.incoming?.url,
-            dateArray[0],
-            dateArray[1],
+            dayjs(dateArray[0]).format("YYYY-MM-DD"),
+            dayjs(dateArray[1]).format("YYYY-MM-DD"),
             profile.incoming.type
           );
           const outgoingCount = await fetchTransactionCount(
             profile.outgoing?.url,
-            dateArray[0],
-            dateArray[1],
+            dayjs(dateArray[0]).format("YYYY-MM-DD"),
+            dayjs(dateArray[1]).format("YYYY-MM-DD"),
             profile.outgoing.type
           );
 
@@ -141,12 +117,10 @@ const HIEDashboard: React.FC = () => {
 
   return (
     <>
-      <DateFilterSection
-        showDateFilter={showDateFilter}
-        dateRangeSelection={dateRangeSelection}
-        handleOnchangeSelector={handleOnchangeSelector}
+      <DateFilterInput
         handleOnChangeRange={handleOnChangeRange}
-        updateTransactions={useUpdateTransactions}
+        updateTransactions={updateTransactions}
+        dateValue={dateArray}
       />
       {showProfileLoader ? (
         <DataTableSkeleton />

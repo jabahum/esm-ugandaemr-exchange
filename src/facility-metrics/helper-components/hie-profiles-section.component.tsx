@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { Grid, Column } from "@carbon/react";
 import { showNotification } from "@openmrs/esm-framework";
-import { DateFilterSection } from "./date-filter-section";
+// import { DateFilterSection } from "./date-filter-section";
 import { ProfileCard } from "./profile-card";
 import ProfileTransactionsSection from "./profile-transactions";
 import styles from "../hie-metrics/hie-dashboard.scss";
