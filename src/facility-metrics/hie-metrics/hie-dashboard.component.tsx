@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Button } from "@carbon/react";
+import { Button, DataTableSkeleton } from "@carbon/react";
 import { ChevronLeft, ChevronRight } from "@carbon/react/icons";
 import { ProfileCard } from "../helper-components/profile-card";
 import styles from "./hie-dashboard.scss";
@@ -20,6 +20,7 @@ const HIEDashboard: React.FC = () => {
   const [showDateFilter, setShowDateFilter] = useState(false);
   const [selectedProfile, setSelectedProfile] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [showProfileLoader, setShowProfileLoader] = useState(false);
   const [profileTransactions, setProfileTransactions] = useState<
     Array<ProfileTransactions>
   >([]);
@@ -98,6 +99,7 @@ const HIEDashboard: React.FC = () => {
     ];
     setWillUpdateTransactions(true);
     setDateArray(newDates);
+    setShowProfileLoader(true);
   };
 
   useEffect(() => {
@@ -127,6 +129,7 @@ const HIEDashboard: React.FC = () => {
       ).then((updatedProfiles) => {
         setProfiles(updatedProfiles);
         setWillUpdateTransactions(false);
+        setShowProfileLoader(false);
       });
     }
   }, [willUpdateTransactions, dateArray, profiles]);
@@ -140,45 +143,49 @@ const HIEDashboard: React.FC = () => {
         handleOnChangeRange={handleOnChangeRange}
         updateTransactions={useUpdateTransactions}
       />
-      <div className={styles.fourDivCarousel}>
-        <div className={styles.carouselContainer}>
-          <Button
-            as="div"
-            kind="ghost"
-            className={styles.carouselLeftControl}
-            hasIconOnly
-            renderIcon={ChevronLeft}
-            onClick={moveLeft}
-          />
-          <div className={styles.carouselRightControlDiv}>
+      {showProfileLoader ? (
+        <DataTableSkeleton />
+      ) : (
+        <div className={styles.fourDivCarousel}>
+          <div className={styles.carouselContainer}>
             <Button
               as="div"
               kind="ghost"
-              className={styles.carouselRightControl}
+              className={styles.carouselLeftControl}
               hasIconOnly
-              renderIcon={ChevronRight}
-              onClick={moveRight}
+              renderIcon={ChevronLeft}
+              onClick={moveLeft}
             />
-          </div>
+            <div className={styles.carouselRightControlDiv}>
+              <Button
+                as="div"
+                kind="ghost"
+                className={styles.carouselRightControl}
+                hasIconOnly
+                renderIcon={ChevronRight}
+                onClick={moveRight}
+              />
+            </div>
 
-          <div
-            className={styles.carouselContent}
-            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          >
-            {profiles?.map((fhirProfile, index) => (
-              <div className={styles.carouselItem} key={index}>
-                <ProfileCard
-                  profile={fhirProfile}
-                  onClickHandler={handleSelectedProfile}
-                  selectedClass={
-                    selectedProfile === fhirProfile ? styles.selected : ""
-                  }
-                />
-              </div>
-            ))}
+            <div
+              className={styles.carouselContent}
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+              {profiles?.map((fhirProfile, index) => (
+                <div className={styles.carouselItem} key={index}>
+                  <ProfileCard
+                    profile={fhirProfile}
+                    onClickHandler={handleSelectedProfile}
+                    selectedClass={
+                      selectedProfile === fhirProfile ? styles.selected : ""
+                    }
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
       {selectedProfile ? (
         profileTransactions.length > 0 ? (
           <DataList
