@@ -18,11 +18,11 @@ export const ProfileCard = ({ profile, onClickHandler, selectedClass }) => {
           </div>
           <div className={profileStyles.profileStats}>
             <div className={profileStyles.firstItem}>
+              <div>{profile?.incoming?.total}</div>
               <ArrowDown size={15} className={profileStyles.inComingArrow} />
-              <div>{profile?.incoming?.count}</div>
             </div>
             <div className={profileStyles.secondItem}>
-              <div>{profile?.outgoing?.count}</div>
+              <div>{profile?.outgoing?.total}</div>
               <ArrowUp size={15} className={profileStyles.outGoingArrow} />
             </div>
           </div>

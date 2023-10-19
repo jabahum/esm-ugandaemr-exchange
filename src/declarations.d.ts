@@ -46,12 +46,16 @@ declare type exchangeProfile = {
   icon: JSX.Element;
   incoming?: {
     url?: string;
-    count?: number;
+    total?: number;
+    success?: number;
+    failure?: number;
     type?: string;
   };
   outgoing?: {
     url?: string;
-    count?: number;
+    total?: number;
+    success?: number;
+    failure?: number;
     type?: string;
   };
 };
@@ -74,9 +78,10 @@ declare type ProfileTransactions = {
   name: string;
   identifier: string;
   status: string;
-  statuCode?: string;
-  dateCreated: string;
-}
+  statusCode?: string;
+  dateCreated?: string;
+  comment?: string;
+};
 
 declare type HIEProfilesInterface = {
   alis: ProfileInterface;

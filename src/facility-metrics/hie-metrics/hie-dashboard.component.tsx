@@ -1,5 +1,13 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Button, DataTableSkeleton } from "@carbon/react";
+import {
+  Button,
+  DataTableSkeleton,
+  Tab,
+  Tabs,
+  TabList,
+  TabPanels,
+  TabPanel,
+} from "@carbon/react";
 import { ChevronLeft, ChevronRight } from "@carbon/react/icons";
 import { ProfileCard } from "../helper-components/profile-card";
 import styles from "./hie-dashboard.scss";
@@ -20,9 +28,10 @@ const HIEDashboard: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showProfileLoader, setShowProfileLoader] = useState(false);
   const [showTransactionLoader, setShowTransactionLoader] = useState(false);
-  const [profileTransactions, setProfileTransactions] = useState<
-    Array<ProfileTransactions>
-  >([]);
+  const [incomingProfileTransactions, setIncomingProfileTransactions] =
+    useState<Array<ProfileTransactions>>([]);
+  const [outgoingProfileTransactions, setOutgoingProfileTransactions] =
+    useState<Array<ProfileTransactions>>([]);
   const [dateArray, setDateArray] = useState([new Date(), new Date()]);
   const [willUpdateTransactions, setWillUpdateTransactions] = useState(true);
   const { exchangeProfiles, maxPosition } = getProfiles();
@@ -53,16 +62,29 @@ const HIEDashboard: React.FC = () => {
   const handleSelectedProfile = useCallback(
     (profile) => {
       setShowTransactionLoader(true);
-
-      fetchTransactions(
-        profile.outgoing.url,
-        dayjs(dateArray[0]).format("YYYY-MM-DD"),
-        dayjs(dateArray[1]).format("YYYY-MM-DD"),
-        profile.outgoing.type
-      )
-        .then((response) => {
-          const transactions = mapDataElements(response?.data["results"]);
-          setProfileTransactions(transactions);
+      Promise.all([
+        fetchTransactions(
+          profile.incoming.url,
+          dayjs(dateArray[0]).format("YYYY-MM-DD"),
+          dayjs(dateArray[1]).format("YYYY-MM-DD"),
+          profile.incoming.type
+        ),
+        fetchTransactions(
+          profile.outgoing.url,
+          dayjs(dateArray[0]).format("YYYY-MM-DD"),
+          dayjs(dateArray[1]).format("YYYY-MM-DD"),
+          profile.outgoing.type
+        ),
+      ])
+        .then(([incoming, outgoing]) => {
+          const incomingTransactions = mapDataElements(
+            incoming?.data["results"]
+          );
+          const outgoingTransactions = mapDataElements(
+            outgoing?.data["results"]
+          );
+          setIncomingProfileTransactions(incomingTransactions);
+          setOutgoingProfileTransactions(outgoingTransactions);
           setSelectedProfile(profile);
           setShowTransactionLoader(false);
         })
@@ -81,6 +103,7 @@ const HIEDashboard: React.FC = () => {
   const updateTransactions = () => {
     setWillUpdateTransactions(true);
     setShowProfileLoader(true);
+    setSelectedProfile(null);
   };
 
   useEffect(() => {
@@ -102,8 +125,8 @@ const HIEDashboard: React.FC = () => {
             profile.outgoing.type
           );
 
-          profile.incoming.count = incomingCount.count;
-          profile.outgoing.count = outgoingCount.count;
+          profile.incoming.total = incomingCount.total;
+          profile.outgoing.total = outgoingCount.total;
 
           return profile;
         })
@@ -168,24 +191,54 @@ const HIEDashboard: React.FC = () => {
       {showTransactionLoader ? (
         <DataTableSkeleton />
       ) : selectedProfile ? (
-        profileTransactions.length > 0 ? (
-          <>
-            <div className={styles.profileTransHeading}>
-              {selectedProfile.name} Transactions{" ("}
-              {dayjs(dateArray[0]).format("DD/MMM/YYYY")} -{" "}
-              {dayjs(dateArray[1]).format("DD/MMM/YYYY")}
-              {")"}
-            </div>
-            <DataList
-              data={profileTransactions}
-              columns={profileTransactionsHeaders}
-            />
-          </>
-        ) : (
-          <EmptyStateComponent
-            title={`No data found for the selected period`}
-          />
-        )
+        <>
+          <div className={styles.profileTransHeading}>
+            {selectedProfile.name} Transactions{" ("}
+            {dayjs(dateArray[0]).format("DD/MMM/YYYY")} -{" "}
+            {dayjs(dateArray[1]).format("DD/MMM/YYYY")}
+            {")"}
+          </div>
+          <Tabs>
+            <TabList aria-label="Profile transactions tabs">
+              <Tab>Outgoing ({outgoingProfileTransactions.length})</Tab>
+              <Tab>Incoming ({incomingProfileTransactions.length})</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                {outgoingProfileTransactions.length > 0 ? (
+                  <DataList
+                    data={outgoingProfileTransactions}
+                    columns={profileTransactionsHeaders}
+                  />
+                ) : (
+                  <EmptyStateComponent
+                    title={`No outgoing transactions for ${selectedProfile.name}`}
+                  />
+                )}
+              </TabPanel>
+              <TabPanel>
+                {incomingProfileTransactions.length > 0 ? (
+                  <DataList
+                    data={incomingProfileTransactions}
+                    columns={[
+                      ...profileTransactionsHeaders,
+                      {
+                        id: "5",
+                        key: "comment",
+                        header: "COMMENTS",
+                        accessor: "comment",
+                      },
+                    ]}
+                  />
+                ) : (
+                  <EmptyStateComponent
+                    title={`No incoming transactions for ${selectedProfile.name}`}
+                  />
+                )}
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        </>
       ) : (
         <EmptyStateComponent title={`Click on one of the profiles above`} />
       )}

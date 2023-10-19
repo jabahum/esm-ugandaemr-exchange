@@ -35,25 +35,25 @@ export const profileTransactionsHeaders = [
   {
     id: "1",
     key: "identifier",
-    header: "IDENTIFIER",
+    header: "HIV CLINIC NO",
     accessor: "identifier",
   },
   {
     id: "2",
     key: "name",
-    header: "NAME",
+    header: "CLIENT NAME",
     accessor: "name",
   },
   {
     id: "3",
     key: "status",
-    header: "STATUS",
+    header: "TRANSACTION STATUS",
     accessor: "status",
   },
   {
     id: "4",
     key: "dateCreated",
-    header: "DATE CREATED",
+    header: "DATE",
     accessor: "dateCreated",
   },
 ];
