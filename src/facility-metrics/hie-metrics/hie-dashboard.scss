@@ -157,4 +157,8 @@
   padding-top: 5px;
 }
 
+.profileTransHeading {
+  padding: 3rem 0 0 0.5rem;
+  @include type.type-style("heading-04");
+}
 

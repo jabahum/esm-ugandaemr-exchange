@@ -169,10 +169,18 @@ const HIEDashboard: React.FC = () => {
         <DataTableSkeleton />
       ) : selectedProfile ? (
         profileTransactions.length > 0 ? (
-          <DataList
-            data={profileTransactions}
-            columns={profileTransactionsHeaders}
-          />
+          <>
+            <div className={styles.profileTransHeading}>
+              {selectedProfile.name} Transactions{" ("}
+              {dayjs(dateArray[0]).format("DD/MMM/YYYY")} -{" "}
+              {dayjs(dateArray[1]).format("DD/MMM/YYYY")}
+              {")"}
+            </div>
+            <DataList
+              data={profileTransactions}
+              columns={profileTransactionsHeaders}
+            />
+          </>
         ) : (
           <EmptyStateComponent
             title={`No data found for the selected period`}
