@@ -31,7 +31,8 @@ export function mapDataElements(dataArray: Array<Record<string, string>>) {
           generateBundle: profile?.generateBundle,
           caseBasedProfile: profile?.caseBasedProfile,
           caseBasedPrimaryResourceType: profile?.caseBasedPrimaryResourceType,
-          caseBasedPrimaryResourceTypeId: profile?.caseBasedPrimaryResourceTypeId,
+          caseBasedPrimaryResourceTypeId:
+            profile?.caseBasedPrimaryResourceTypeId,
           resourceSearchParameter: profile?.resourceSearchParameter,
           conceptSource: profile?.conceptSource,
           url: profile?.url,
