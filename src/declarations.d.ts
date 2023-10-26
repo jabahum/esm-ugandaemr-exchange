@@ -81,6 +81,7 @@ declare type ProfileTransactions = {
   statusCode?: string;
   dateCreated?: string;
   comment?: string;
+  actions?: any;
 };
 
 declare type HIEProfilesInterface = {

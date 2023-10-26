@@ -17,6 +17,7 @@ import {
 } from "@carbon/react/icons";
 import useSWR from "swr";
 import dayjs from "dayjs";
+import { TableAction } from "./hie-metrics/hie-dashboard.component";
 
 export function useFetchSyncFhirProfiles() {
   const apiURL = "ws/rest/v1/syncfhirprofile?v=custom:(uuid,name)";
@@ -112,16 +113,16 @@ export function getProfiles() {
       },
     },
     {
-      uuid: "0a7fff77-6ac7-416c-831e-4e3f1f2c853b",
+      uuid: "2f0ef683-c988-448b-b928-e3e2cf6657af",
       name: "ALIS",
       type: "fhirProfile",
       icon: <Microscope size={25} />,
       incoming: {
-        url: "no-url",
+        url: "d4a3ebbb-e793-4e56-867c-0cf998e51f56",
         total: 0,
         success: 0,
         failure: 0,
-        type: "fhirProfile",
+        type: "syncTask",
       },
       outgoing: {
         url: "2f0ef683-c988-448b-b928-e3e2cf6657af",
@@ -374,13 +375,14 @@ export function mapDataElements(dataArray: Array<Record<string, string>>) {
   const arrayToReturn: Array<ProfileTransactions> = [];
   if (dataArray) {
     dataArray.map((profile: Record<string, any>) => {
-      arrayToReturn.push({
+      return arrayToReturn.push({
         name: profile.name,
         identifier: profile.identifier,
         status: profile.status,
         statusCode: profile.statusCode,
-        comment: profile.comment,
+        comment: "Received",
         dateCreated: dayjs(profile.dateCreated).format("DD MMM YYYY"),
+        actions: TableAction(),
       });
     });
   }

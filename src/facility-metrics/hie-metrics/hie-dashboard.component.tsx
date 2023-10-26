@@ -8,7 +8,7 @@ import {
   TabPanels,
   TabPanel,
 } from "@carbon/react";
-import { ChevronLeft, ChevronRight } from "@carbon/react/icons";
+import { ChevronLeft, ChevronRight, ChooseItem } from "@carbon/react/icons";
 import { ProfileCard } from "../helper-components/profile-card";
 import styles from "./hie-dashboard.scss";
 import { EmptyStateComponent } from "../../components/empty-state/empty-state.component";
@@ -20,7 +20,10 @@ import {
 } from "../facility-metrics.resource";
 import { DateFilterInput } from "../helper-components/date-filter-section";
 import dayjs from "dayjs";
-import { profileTransactionsHeaders } from "../../constants";
+import {
+  incomingTransactionsHeaders,
+  profileTransactionsHeaders,
+} from "../../constants";
 import DataList from "../../components/data-table/data-table.component";
 
 const HIEDashboard: React.FC = () => {
@@ -220,15 +223,7 @@ const HIEDashboard: React.FC = () => {
                 {incomingProfileTransactions.length > 0 ? (
                   <DataList
                     data={incomingProfileTransactions}
-                    columns={[
-                      ...profileTransactionsHeaders,
-                      {
-                        id: "5",
-                        key: "comment",
-                        header: "COMMENTS",
-                        accessor: "comment",
-                      },
-                    ]}
+                    columns={incomingTransactionsHeaders}
                   />
                 ) : (
                   <EmptyStateComponent
@@ -247,3 +242,17 @@ const HIEDashboard: React.FC = () => {
 };
 
 export default HIEDashboard;
+
+export const TableAction = () => {
+  return (
+    <Button
+      type="button"
+      size="sm"
+      className="submitButton clear-padding-margin"
+      iconDescription={"View Results"}
+      kind="ghost"
+      renderIcon={ChooseItem}
+      hasIconOnly
+    />
+  );
+};
