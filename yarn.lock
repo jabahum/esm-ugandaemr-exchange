@@ -1536,6 +1536,49 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon/charts-react@npm:^1.13.6":
+  version: 1.13.6
+  resolution: "@carbon/charts-react@npm:1.13.6"
+  dependencies:
+    "@carbon/charts": 1.13.6
+    "@carbon/icons-react": ^11.28.0
+    "@carbon/telemetry": ~0.1.0
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
+  checksum: 9bca9bbf123694107818121cc0f05f66165dbdca4d37f6e44ee497d44a17050a3e38df19504b881e26af06d2b3ee2f70212527db009b41c776157e1c667c05db
+  languageName: node
+  linkType: hard
+
+"@carbon/charts@npm:1.13.6":
+  version: 1.13.6
+  resolution: "@carbon/charts@npm:1.13.6"
+  dependencies:
+    "@carbon/colors": ^11.19.0
+    "@carbon/telemetry": ~0.1.0
+    "@carbon/utils-position": ^1.1.4
+    carbon-components: ^10.58.10
+    d3: ^7.8.5
+    d3-cloud: ^1.2.7
+    d3-sankey: ^0.12.3
+    date-fns: ^2.30.0
+    html-to-image: ^1.11.11
+    lodash-es: ^4.17.21
+    topojson-client: ^3.1.0
+    tslib: ^2.6.2
+  peerDependencies:
+    d3: ^7.0.0
+    d3-cloud: ^1.2.5
+    d3-sankey: ^0.12.3
+  peerDependenciesMeta:
+    d3-cloud:
+      optional: true
+    d3-sankey:
+      optional: true
+  checksum: 8aebcf793f3fdd0d60633f54bad3b252a93f55aeac245405544ef70cc071c209cab84745d116bb748f590ccafa534c739d77765b28e3987d3f6c737f154b8568
+  languageName: node
+  linkType: hard
+
 "@carbon/charts@npm:^1.6.3":
   version: 1.11.21
   resolution: "@carbon/charts@npm:1.11.21"
@@ -1605,6 +1648,19 @@ __metadata:
   peerDependencies:
     react: ">=16"
   checksum: eaffc943b329cb1982b8f49820c60a5fd5042f43873ec9b1f2e85d28ec05cc06d9ab8c416015f527a8477a9e7a09a8a1b8b58ad18686c652a64af56305f7b426
+  languageName: node
+  linkType: hard
+
+"@carbon/icons-react@npm:^11.28.0":
+  version: 11.28.0
+  resolution: "@carbon/icons-react@npm:11.28.0"
+  dependencies:
+    "@carbon/icon-helpers": ^10.44.0
+    "@carbon/telemetry": 0.1.0
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ">=16"
+  checksum: c52c63835b43feb3177c4a90161dfb5191a542be0dfe6a3196af96a675f58b75e6c82718413653a313829c04c06d68072a21be66f7d36e39566e61609debaabd
   languageName: node
   linkType: hard
 
@@ -5204,6 +5260,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@ugandaemr/esm-ugandaemr-exchange-app@workspace:."
   dependencies:
+    "@carbon/charts-react": ^1.13.6
     "@carbon/react": ^1.33.1
     "@openmrs/esm-framework": next
     "@openmrs/esm-styleguide": next
@@ -5223,6 +5280,7 @@ __metadata:
     "@types/webpack-env": ^1.18.1
     "@typescript-eslint/eslint-plugin": ^5.61.0
     "@typescript-eslint/parser": ^5.61.0
+    apexcharts: ^3.43.2-0
     css-loader: ^6.8.1
     dayjs: ^1.11.10
     eslint: ^8.44.0
@@ -5496,6 +5554,13 @@ __metadata:
   version: 4.2.2
   resolution: "@xtuc/long@npm:4.2.2"
   checksum: 8ed0d477ce3bc9c6fe2bf6a6a2cc316bb9c4127c5a7827bae947fa8ec34c7092395c5a283cc300c05b5fa01cbbfa1f938f410a7bf75db7c7846fea41949989ec
+  languageName: node
+  linkType: hard
+
+"@yr/monotone-cubic-spline@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "@yr/monotone-cubic-spline@npm:1.0.3"
+  checksum: ebc75e4d84d5b97d1d715452088ffe3cf6b3d71943433118116a2e90f17aed654b6f726868e913a49aef28645bb8afcc28580349de1ac77ad0c7dab3d991843e
   languageName: node
   linkType: hard
 
@@ -5816,6 +5881,21 @@ __metadata:
     normalize-path: ^3.0.0
     picomatch: ^2.0.4
   checksum: 3e044fd6d1d26545f235a9fe4d7a534e2029d8e59fa7fd9f2a6eb21230f6b5380ea1eaf55136e60cbf8e613544b3b766e7a6fa2102e2a3a117505466e3025dc2
+  languageName: node
+  linkType: hard
+
+"apexcharts@npm:^3.43.2-0":
+  version: 3.43.2-0
+  resolution: "apexcharts@npm:3.43.2-0"
+  dependencies:
+    "@yr/monotone-cubic-spline": ^1.0.3
+    svg.draggable.js: ^2.2.2
+    svg.easing.js: ^2.0.0
+    svg.filter.js: ^2.0.2
+    svg.pathmorphing.js: ^0.1.3
+    svg.resize.js: ^1.4.3
+    svg.select.js: ^3.0.1
+  checksum: 29931609ffb07ed1205caf448876caea00a7bc97b425eaf9394cec89e1d84d5bc908997c093f6c76a4aedd16dad8a31b328220f1ec5cfa5fdc8af276bd336782
   languageName: node
   linkType: hard
 
@@ -7271,6 +7351,18 @@ __metadata:
   version: 1.0.30001522
   resolution: "caniuse-lite@npm:1.0.30001522"
   checksum: 56e3551c02ae595085114073cf242f7d9d54d32255c80893ca9098a44f44fc6eef353936f234f31c7f4cb894dd2b6c9c4626e30649ee29e04d70aa127eeefeb0
+  languageName: node
+  linkType: hard
+
+"carbon-components@npm:^10.58.10":
+  version: 10.58.11
+  resolution: "carbon-components@npm:10.58.11"
+  dependencies:
+    "@carbon/telemetry": 0.1.0
+    flatpickr: 4.6.1
+    lodash.debounce: ^4.0.8
+    warning: ^3.0.0
+  checksum: d53969e39e496110a7136802a08cb1b1d68c859efe96fcbe62af1ea67cea0d2d552c9d8b58d7413199d21841a5e26bfb781bae2cae6595097681c5587e2e6d6d
   languageName: node
   linkType: hard
 
@@ -20548,6 +20640,77 @@ __metadata:
   languageName: node
   linkType: hard
 
+"svg.draggable.js@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "svg.draggable.js@npm:2.2.2"
+  dependencies:
+    svg.js: ^2.0.1
+  checksum: b9068975d743be664695e7d4323624bba8ff2795b855a46a2f15c842827022684501d63239c99723238d39c9f991940dc04639b8f43ac124fd9ca44a34e6aab2
+  languageName: node
+  linkType: hard
+
+"svg.easing.js@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "svg.easing.js@npm:2.0.0"
+  dependencies:
+    svg.js: ">=2.3.x"
+  checksum: 0f7df78333d879dc00200ddbb4e9d7d745307c002b5dd242ddaf276e8d907067ab75383869ef1940975be1765d595d379ced491ff4bdf78d867bff8225544e92
+  languageName: node
+  linkType: hard
+
+"svg.filter.js@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "svg.filter.js@npm:2.0.2"
+  dependencies:
+    svg.js: ^2.2.5
+  checksum: f0e780bfe385336a7c9d1d8a3ebba1ca9712f6bf0917769fd30c9fd4e3559186ec18d4d6520d9841a9cceba2ac8ff1eacc76b98f7e8b15d5f4a58975a8ecdc64
+  languageName: node
+  linkType: hard
+
+"svg.js@npm:>=2.3.x, svg.js@npm:^2.0.1, svg.js@npm:^2.2.5, svg.js@npm:^2.4.0, svg.js@npm:^2.6.5":
+  version: 2.7.1
+  resolution: "svg.js@npm:2.7.1"
+  checksum: 945bfc9623985fefb4c7275a1b98b5168e5857291f46cbd299bd2e14ce7f4428fea6569c7446d37b75694c43dea01a5f179fbce4f770e7dcd136117bb8f1a3f3
+  languageName: node
+  linkType: hard
+
+"svg.pathmorphing.js@npm:^0.1.3":
+  version: 0.1.3
+  resolution: "svg.pathmorphing.js@npm:0.1.3"
+  dependencies:
+    svg.js: ^2.4.0
+  checksum: bcbe1ccea95c980fa127cb6ad955f1970d763143ab11576cca2fd8d13616deedf933bc17a6310754cd0cb404ac501d627afb5805c578878e4c8f24e1818a7de6
+  languageName: node
+  linkType: hard
+
+"svg.resize.js@npm:^1.4.3":
+  version: 1.4.3
+  resolution: "svg.resize.js@npm:1.4.3"
+  dependencies:
+    svg.js: ^2.6.5
+    svg.select.js: ^2.1.2
+  checksum: 8f4116f4422b72c66bb1110dca2d77ab2cc0665db1e0cd1c0020e06fe9684f53d9bc7aca3b90ce82ce35103ff8ea83a93df1db5d88c889e511d7622c9b000884
+  languageName: node
+  linkType: hard
+
+"svg.select.js@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "svg.select.js@npm:2.1.2"
+  dependencies:
+    svg.js: ^2.2.5
+  checksum: 1dbbb44d16170aad1372e0f8f0d109a21e4216e1e4e28a566738c6cb6b4519b37e44cd1f7de06f3c8eec5e588845d8cbb0e37efc89b8d27401e4c6a0a13564a4
+  languageName: node
+  linkType: hard
+
+"svg.select.js@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "svg.select.js@npm:3.0.1"
+  dependencies:
+    svg.js: ^2.6.5
+  checksum: 0ce3bda86f4b527ce1add02d0ac61ac26678db24c0e4126c584b752e65a1c3458bbe958e29eb4604b3157ef1fdace37b727eccbc2ccdb4fce0015e0ad196fc1c
+  languageName: node
+  linkType: hard
+
 "svgo@npm:^2.7.0":
   version: 2.8.0
   resolution: "svgo@npm:2.8.0"
@@ -21071,7 +21234,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.6.1":
+"tslib@npm:^2.0.0, tslib@npm:^2.0.1, tslib@npm:^2.0.3, tslib@npm:^2.1.0, tslib@npm:^2.6.1, tslib@npm:^2.6.2":
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
   checksum: 329ea56123005922f39642318e3d1f0f8265d1e7fcb92c633e0809521da75eeaca28d2cf96d7248229deb40e5c19adf408259f4b9640afd20d13aecc1430f3ad

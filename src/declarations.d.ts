@@ -38,3 +38,69 @@ declare type fhirProfile = {
   links?: Array<link>;
   actions: any;
 };
+
+declare type exchangeProfile = {
+  uuid: string;
+  name: string;
+  type: "fhirProfile" | "syncTask";
+  icon: JSX.Element;
+  incoming?: {
+    url?: string;
+    total?: number;
+    success?: number;
+    failure?: number;
+    type?: string;
+  };
+  outgoing?: {
+    url?: string;
+    total?: number;
+    success?: number;
+    failure?: number;
+    type?: string;
+  };
+};
+
+declare type SyncTaskType = {
+  uuid: string;
+  name: string;
+};
+
+declare type SyncFHIRProfile = {
+  uuid: string;
+  name: string;
+};
+
+declare type TransactionCount = {
+  count: number;
+};
+
+declare type ProfileTransactions = {
+  name: string;
+  identifier: string;
+  status: string;
+  statusCode?: string;
+  dateCreated?: string;
+  comment?: string;
+  actions?: any;
+};
+
+declare type HIEProfilesInterface = {
+  alis: ProfileInterface;
+  artAccess: ProfileInterface;
+  cbs: ProfileInterface;
+  clientRegistry: ProfileInterface;
+  ecbs: ProfileInterface;
+  ehmis: ProfileInterface;
+  facilitySHR: ProfileInterface;
+  pirs: ProfileInterface;
+  smsReminders: ProfileInterface;
+  viralLoad: ProfileInterface;
+};
+
+declare type ProfileInterface = {
+  name: string;
+  incomingCount?: number;
+  outgoingCount?: number;
+  incoming?: [];
+  outgoing?: [];
+};

@@ -1,0 +1,165 @@
+@use 'node_modules/@carbon/styles/scss/colors';
+@use 'node_modules/@carbon/styles/scss/spacing';
+@use 'node_modules/@carbon/styles/scss/type/index';
+@use '@carbon/styles/scss/type';
+@import "node_modules/@openmrs/esm-styleguide/src/vars";
+
+.gridContainer{
+  padding: 0;
+  margin: 0;
+  .gridChild{
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.upperDiv {
+  padding: 1rem 0 0 0;
+  margin: 1rem;
+  background-color: rgb(244, 244, 244);
+}
+
+.profileHeader {
+  @include type.type-style("heading-02");
+}
+
+.cardTile {
+  border: 0.0625rem solid #e0e0e0;
+  border-radius: 1rem
+}
+
+.cardWrapper{
+  display: flex;
+  justify-content: space-between;
+}
+
+.outGoingArrow {
+  color: $brand-primary-50;
+}
+
+.inComingArrow {
+  color: $interactive-01;
+}
+
+.profileName {
+  padding-top: 1rem;
+}
+
+.transactionsSection{
+  margin: 0.5rem 0 0 1rem;
+}
+
+.emptyState{
+  text-align: center;
+  padding: 4rem;
+  margin: 1rem;
+}
+
+.noTransactionTile{
+  text-align: center;
+  padding: 2rem;
+}
+
+.selectedPeriod{
+  width: fit-content;
+  display: flex;
+  align-items: center;
+}
+
+.dateRangeSelector{
+  width: fit-content;
+  margin: 0 7rem 0 auto;
+}
+
+.datePicker{
+  display: flex;
+  width: fit-content;
+  margin: -3.5rem 0.5rem 0 auto;
+
+  input{
+    background-color: #ffffff;
+  }
+
+  :global(.cds--date-picker-container) {
+    margin-right: 1rem !important;
+  }
+}
+
+.fourDivCarousel {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.updateTransaction {
+  svg {
+    margin-right: 0.5rem;
+  }
+}
+
+.carouselContainer {
+  overflow: hidden;
+}
+
+.carouselContent {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.carouselItem {
+  width: 12.5%;
+  flex-shrink: 0;
+  padding:  0 1.5rem 0 1.5rem;
+
+  :global(.cds--tile) {
+    background-color: transparent;
+  }
+
+  :global(.cds--tile--clickable:hover) {
+    background-color: $field-01;
+  }
+
+  .selected {
+    background-color: $field-01;
+  }
+}
+
+.carouselControlsContainer {
+  display: flex;
+}
+
+.carouselLeftControl {
+  position: absolute;
+  z-index: 2;
+  margin-top: 1.5rem;
+  margin-left: -0.7rem;
+}
+
+.carouselRightControl {
+  position: absolute;
+  margin-left: -2.3rem;
+  margin-top: 1.5rem;
+  z-index: 2;
+}
+
+.carouselRightControlDiv {
+  float: right;
+}
+
+.firstItem {
+  padding-bottom: 1.4rem;
+  display: flex;
+  padding-left: 11px;
+}
+
+.secondItem {
+  display: flex;
+  padding-left: 11px;
+  padding-top: 5px;
+}
+
+.profileTransHeading {
+  padding: 3rem 0 0 0.5rem;
+  @include type.type-style("heading-04");
+}
+

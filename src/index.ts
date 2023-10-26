@@ -33,7 +33,7 @@ export const healthExchangeLink = getSyncLifecycle(
 export const hieHomeLink = getSyncLifecycle(
   createLeftPanelLink({
     name: "",
-    title: "HIE Dashboard",
+    title: "Facility Metrics",
   }),
   options
 );
