@@ -1,0 +1,41 @@
+@use 'node_modules/@carbon/styles/scss/colors';
+@use 'node_modules/@carbon/styles/scss/spacing';
+@use 'node_modules/@carbon/styles/scss/type/index';
+@use '@carbon/styles/scss/type';
+@import "node_modules/@openmrs/esm-styleguide/src/vars";
+
+.chartRowContainer {
+  display: flex;
+}
+
+.chartItem {
+  width: 25%;
+  border: 1px #8080801f solid;
+  padding: 1rem
+}
+
+.boxHeader {
+  @include type.type-style("heading-03");
+}
+
+.boxItem {
+  display: grid;
+  text-align: center;
+  margin: 4rem 0 0 0;
+}
+
+.boxFirstItem {
+  @include type.type-style("heading-05");
+}
+
+.boxSecondItem {
+ color: $brand-primary-50;
+
+  svg {
+    margin: 0 0 -0.5rem -0.5rem;
+  }
+}
+
+.boxThirdItem {
+  @include type.type-style("legal-01");
+}

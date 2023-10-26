@@ -46,6 +46,7 @@
   "dependencies": {
     "@carbon/charts-react": "^1.13.6",
     "@carbon/react": "^1.33.1",
+    "d3": "^7.6.1",
     "dayjs": "^1.11.10",
     "lodash-es": "^4.17.21",
     "react-image-annotate": "^1.8.0"
@@ -77,8 +78,8 @@
     "@types/webpack-env": "^1.18.1",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
-    "apexcharts": "^3.43.2-0",
     "css-loader": "^6.8.1",
+    "d3": "^7.6.1",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-config-ts-react-important-stuff": "^3.0.0",
