@@ -104,3 +104,8 @@ declare type ProfileInterface = {
   incoming?: [];
   outgoing?: [];
 };
+
+declare type DonutData = Array<{
+  group: string;
+  value: number;
+}>;

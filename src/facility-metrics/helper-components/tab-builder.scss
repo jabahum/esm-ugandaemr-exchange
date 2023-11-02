@@ -68,6 +68,11 @@
   padding-right: 1rem;
   padding-top: 1rem;
   margin-bottom: 1rem;
+
+  :global(.cds--tabs:not(.cds--tabs--contained) .cds--tabs__nav-item:not(.cds--tabs__nav-item--selected):not(.cds--tabs__nav-item--disabled):hover) {
+    border-bottom: none;
+    font-weight: bold;
+  }
 }
 
 

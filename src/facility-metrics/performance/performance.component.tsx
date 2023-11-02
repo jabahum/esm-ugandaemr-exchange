@@ -16,17 +16,22 @@ import {
 } from "./mock-data";
 import { CaretUp } from "@carbon/react/icons";
 import styles from "./performance.scss";
+import { useGetFacilityMetrics } from "./performance.resource";
 
 const Performance: React.FC = () => {
+  const { isLoading, facilityMetrics } = useGetFacilityMetrics();
+
   return (
     <>
       <div className={styles.chartRowContainer}>
         <div className={styles.chartItem}>
           <span className={styles.boxHeader}> Patients</span>
           <div className={styles.boxItem}>
-            <span className={styles.boxFirstItem}>29,206</span>
+            <span className={styles.boxFirstItem}>
+              {facilityMetrics?.totalPatients}
+            </span>
             <span className={styles.boxSecondItem}>
-              92% <CaretUp size={30} />
+              82% <CaretUp size={30} />
             </span>
             <span className={styles.boxThirdItem}>vs previous year</span>
           </div>
@@ -34,7 +39,7 @@ const Performance: React.FC = () => {
         <div className={styles.chartItem}>
           <span className={styles.boxHeader}> Inpatients </span>
           <div className={styles.boxItem}>
-            <span className={styles.boxFirstItem}>11,251</span>
+            <span className={styles.boxFirstItem}>10</span>
             <span className={styles.boxSecondItem}>
               88% <CaretUp size={30} />
             </span>
@@ -44,7 +49,7 @@ const Performance: React.FC = () => {
         <div className={styles.chartItem}>
           <span className={styles.boxHeader}> Outpatients </span>
           <div className={styles.boxItem}>
-            <span className={styles.boxFirstItem}>17,955</span>
+            <span className={styles.boxFirstItem}>{facilityMetrics?.totalPatients - 10}</span>
             <span className={styles.boxSecondItem}>
               80% <CaretUp size={30} />
             </span>
@@ -52,7 +57,10 @@ const Performance: React.FC = () => {
           </div>
         </div>
         <div className={styles.chartItem}>
-          <DonutChart data={donutGenderData} options={donutGenderOptions} />
+          <DonutChart
+            data={isLoading ? [] : facilityMetrics?.gender}
+            options={donutGenderOptions}
+          />
         </div>
       </div>
 
@@ -68,7 +76,7 @@ const Performance: React.FC = () => {
         </div>
         <div className={styles.chartItem}>
           <DonutChart
-            data={donutDepartmentData}
+            data={isLoading ? [] : facilityMetrics?.nationality}
             options={donutDepartmentOptions}
           />
         </div>
