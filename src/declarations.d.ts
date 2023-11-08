@@ -82,6 +82,7 @@ declare type ProfileTransactions = {
   dateCreated?: string;
   comment?: string;
   actions?: any;
+  patientUuid?: string;
 };
 
 declare type HIEProfilesInterface = {

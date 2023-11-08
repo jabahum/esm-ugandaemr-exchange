@@ -382,7 +382,7 @@ export function mapDataElements(dataArray: Array<Record<string, string>>) {
         statusCode: profile.statusCode,
         comment: "Received",
         dateCreated: dayjs(profile.dateCreated).format("DD MMM YYYY"),
-        actions: TableAction(),
+        actions: TableAction(profile?.patientUuid),
       });
     });
   }

@@ -49,7 +49,9 @@ const Performance: React.FC = () => {
         <div className={styles.chartItem}>
           <span className={styles.boxHeader}> Outpatients </span>
           <div className={styles.boxItem}>
-            <span className={styles.boxFirstItem}>{facilityMetrics?.totalPatients - 10}</span>
+            <span className={styles.boxFirstItem}>
+              {facilityMetrics?.totalPatients - 10}
+            </span>
             <span className={styles.boxSecondItem}>
               80% <CaretUp size={30} />
             </span>

@@ -243,7 +243,9 @@ const HIEDashboard: React.FC = () => {
 
 export default HIEDashboard;
 
-export const TableAction = () => {
+export const TableAction = (patientUuid) => {
+  const spaBasePath = window.spaBase;
+
   return (
     <Button
       type="button"
@@ -253,6 +255,7 @@ export const TableAction = () => {
       kind="ghost"
       renderIcon={ChooseItem}
       hasIconOnly
+      href={`${spaBasePath}/patient/${patientUuid}/chart/laboratory-orders`}
     />
   );
 };
