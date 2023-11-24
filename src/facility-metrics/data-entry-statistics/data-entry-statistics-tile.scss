@@ -1,0 +1,72 @@
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/type';
+@import "../../root.scss";
+* {
+    box-sizing: border-box;
+}
+
+.tile {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-flow: row wrap;
+    height: 10rem;
+    padding: spacing.$spacing-05;
+    border-radius: 0.2rem;
+    margin: 1rem 0;
+    // max-width: 100%;
+    .tileDiv {
+        margin: 0.5rem;
+        height: 3.5rem;
+    }
+     :global(.cds--label) {
+        font-size: 1rem;
+    }
+     :global(.cds--date-picker-container) {
+        width: 10rem;
+        margin-right: 3rem;
+    }
+    .actionButton {
+        height: 3rem;
+    }
+}
+
+.dataTableContainer {
+    background-color: colors.$gray-10;
+}
+
+.tableContainer {
+    background-color: colors.$gray-10;
+    margin: 0 spacing.$spacing-05;
+    padding: 0;
+     :global(.cds--table-sort__description) {
+        display: none;
+    }
+}
+
+.layerTable {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: spacing.$spacing-05;
+    margin: 2rem 0;
+    text-align: center;
+    border: 1px solid colors.$gray-20;
+}
+
+.tileTable {
+    margin: auto;
+}
+
+.contentTable {
+    @include type.type-style("heading-compact-02");
+    color: colors.$gray-70;
+    margin-top: spacing.$spacing-05;
+    margin-bottom: spacing.$spacing-03;
+}
+
+.explainerTable {
+    @include type.type-style('body-compact-01');
+    color: colors.$gray-70;
+}
