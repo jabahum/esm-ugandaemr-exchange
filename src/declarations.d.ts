@@ -82,6 +82,7 @@ declare type ProfileTransactions = {
   dateCreated?: string;
   comment?: string;
   actions?: any;
+  patientUuid?: string;
 };
 
 declare type HIEProfilesInterface = {
@@ -104,3 +105,8 @@ declare type ProfileInterface = {
   incoming?: [];
   outgoing?: [];
 };
+
+declare type DonutData = Array<{
+  group: string;
+  value: number;
+}>;

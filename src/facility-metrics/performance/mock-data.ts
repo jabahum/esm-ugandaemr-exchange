@@ -47,33 +47,25 @@ export const donutGenderOptions = {
 
 export const donutDepartmentData = [
   {
-    group: "TB Clinic",
-    value: 20000,
+    group: "Refugee",
+    value: 5,
   },
   {
-    group: "MCH Clinic",
-    value: 65000,
+    group: "National",
+    value: 15,
   },
   {
-    group: "Out Patient",
-    value: 75000,
+    group: "Foreigner",
+    value: 6,
   },
   {
-    group: "Inpatient",
-    value: 1200,
-  },
-  {
-    group: "ART Clinic",
-    value: 10000,
-  },
-  {
-    group: "LAB",
-    value: 25000,
+    group: "Uncategorized",
+    value: 4,
   },
 ];
 
 export const donutDepartmentOptions = {
-  title: "Patients by Department",
+  title: "Patients by Nationality",
   resizable: true,
   donut: {
     center: {
