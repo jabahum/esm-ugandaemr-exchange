@@ -20,6 +20,10 @@ const TabBuilder: React.FC = () => {
       component: <HIEDashboard />,
     },
     {
+      name: t("hie", "HIE Metrics"),
+      component: <HIEDashboard />,
+    },
+    {
       name: t("performance", "Performance"),
       component: <FacilityPerformance />,
     },
