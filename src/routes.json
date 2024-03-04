@@ -33,11 +33,13 @@
             "component": "VLSuppressionPredictionWorkspace"
         },
         {
+
             "name": "chatbot-button",
             "component": "ChatbotButton",
             "slot": "homepage-widgets-slot"
         },
         {
+
             "component": "toolsModal",
             "name": "tools-modal",
             "online": true,
@@ -54,6 +56,16 @@
             "name": "pepfar-modal",
             "online": true,
             "offline": true
+
+        },
+        {
+            "name": "health-exchange-app-menu-item",
+            "component": "healthExchangeAppMenuItem",
+            "slot": "app-menu-item-slot",
+            "meta": {
+                "name": "Health Exchange"
+            }
+
         }
     ]
 }
