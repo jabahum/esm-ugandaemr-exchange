@@ -1,11 +1,16 @@
 import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { usePatients } from "../client-registry.resource";
-import { DataTableSkeleton } from "@carbon/react";
+import {
+  extractErrorMessagesFromResponse,
+  startClientRegistryTask,
+  usePatients,
+} from "../client-registry.resource";
 import {
   ExtensionSlot,
   formatDate,
   parseDate,
+  showNotification,
+  showSnackbar,
   usePagination,
 } from "@openmrs/esm-framework";
 import {
@@ -19,17 +24,20 @@ import {
   TableRow,
   TableHeader,
   TableCell,
+  DataTableSkeleton,
+  Button,
+  InlineLoading,
 } from "@carbon/react";
 import styles from "./client-registry-data.scss";
-import { Button } from "@carbon/react";
 import { OverflowMenuVertical } from "@carbon/react/icons";
 
 import OrderCustomOverflowMenuComponent from "../../ui-components/overflow-menu.component";
 
 const ClientRegistryData: React.FC = () => {
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { patients, isLoading, isError, mutate } = usePatients("sarah", false);
+  const { patients, isLoading: loading, mutate } = usePatients("sarah", false);
 
   const pageSizes = [10, 20, 30, 40, 50];
   const [currentPageSize, setPageSize] = useState(10);
@@ -58,6 +66,40 @@ const ClientRegistryData: React.FC = () => {
     ],
     [t]
   );
+
+  const startClientRegistry = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    startClientRegistryTask().then(
+      () => {
+        mutate();
+        setIsLoading(false);
+        showSnackbar({
+          isLowContrast: true,
+          title: t("runTask", "Start Client Registry Task"),
+          kind: "success",
+          subtitle: t(
+            "successfullyStarted",
+            `You have successfully started Client Registry`
+          ),
+        });
+      },
+      (error) => {
+        const errorMessages = extractErrorMessagesFromResponse(error);
+
+        mutate();
+        setIsLoading(false);
+        showNotification({
+          title: t(
+            `errorStartingTask', 'Error Starting client registry task"),`
+          ),
+          kind: "error",
+          critical: true,
+          description: errorMessages.join(", "),
+        });
+      }
+    );
+  };
 
   const tableRows = useMemo(() => {
     return patients?.map((patient, index) => ({
@@ -110,7 +152,7 @@ const ClientRegistryData: React.FC = () => {
     }));
   }, [paginatedPatientEntries]);
 
-  if (isLoading) {
+  if (loading) {
     return <DataTableSkeleton />;
   }
 
@@ -118,10 +160,10 @@ const ClientRegistryData: React.FC = () => {
     <div style={{ margin: "1rem" }}>
       <Button
         style={{ marginLeft: "1rem", marginBottom: "1rem" }}
-        onClick={() => mutate()}
+        onClick={(e) => startClientRegistry(e)}
         kind="primary"
       >
-        Send All to CR
+        {isLoading ? <InlineLoading /> : "Send All to CR"}
       </Button>
       <DataTable rows={tableRows} headers={tableHeaders} useZebraStyles>
         {({

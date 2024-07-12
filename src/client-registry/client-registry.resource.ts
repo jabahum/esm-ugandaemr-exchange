@@ -119,10 +119,34 @@ export function usePatients(q: string, includeDead: boolean) {
 
 // submit patients to CR
 export function submitPatient(payload: Payload) {
-  const { clientRegistryUrl } = useConfig();
+  const config = useConfig();
+  const { clientRegistryUrl } = config;
   const apiUrl = `${clientRegistryUrl}/Patient`;
   return openmrsFetch(apiUrl, {
     method: "POST",
     body: JSON.stringify(payload),
   });
+}
+
+export function startClientRegistryTask() {
+  const apiUrl = `${restBaseUrl}/taskaction`;
+  const payload = {
+    action: "runtask",
+    tasks: ["Send Viral Load Request to Central Server Task"],
+  };
+  return openmrsFetch(apiUrl, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+
+export function extractErrorMessagesFromResponse(errorObject) {
+  const fieldErrors = errorObject?.responseBody?.error?.fieldErrors;
+  if (!fieldErrors) {
+    return [errorObject?.responseBody?.error?.message ?? errorObject?.message];
+  }
+  return Object.values(fieldErrors).flatMap((errors: Array<Error>) =>
+    errors.map((error) => error.message)
+  );
 }
