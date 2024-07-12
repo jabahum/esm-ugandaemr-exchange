@@ -1,3 +1,16 @@
+import {
+  FetchResponse,
+  openmrsFetch,
+  restBaseUrl,
+  useConfig,
+} from "@openmrs/esm-framework";
+import useSWR from "swr";
+
+const v =
+  "custom:(patientId,uuid,identifiers,display," +
+  "patientIdentifier:(uuid,identifier)," +
+  "person:(gender,age,birthdate,birthdateEstimated,personName,addresses,display,dead,deathDate)," +
+  "attributes:(value,attributeType:(uuid,display)))";
 export interface Payload {
   resourceType: string;
   identifier: Identifier[];
@@ -85,4 +98,31 @@ export interface Extension {
 
 export interface ValueReference {
   reference: string;
+}
+
+// get Patients
+export function usePatients(q: string, includeDead: boolean) {
+  const apiUrl = `${restBaseUrl}/patient?q=${q}&v=${v}&includeDead=${includeDead}&totalCount=true&limit=10`;
+  const { data, error, isLoading, isValidating, mutate } = useSWR<
+    FetchResponse,
+    Error
+  >(apiUrl, openmrsFetch);
+
+  return {
+    patients: data?.data?.results || [],
+    isLoading,
+    isError: error,
+    isValidating,
+    mutate,
+  };
+}
+
+// submit patients to CR
+export function submitPatient(payload: Payload) {
+  const { clientRegistryUrl } = useConfig();
+  const apiUrl = `${clientRegistryUrl}/Patient`;
+  return openmrsFetch(apiUrl, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
 }

@@ -23,6 +23,11 @@
             "name": "fhir-profile-link",
             "slot": "health-exchange-left-panel-slot"
         },
+              {
+            "component": "clientRegistryLink",
+            "name": "client-registry-link",
+            "slot": "health-exchange-left-panel-slot"
+        },
         {
             "name": "vl-suppression-prediction",
             "component": "VLSuppressionPrediction",
@@ -57,6 +62,36 @@
             "online": true,
             "offline": true
 
+        },
+                {
+            "name": "no-of-patients-tile-component",
+            "slot": "client-registry-tiles-slot",
+            "component": "totalPatientsTile",
+            "meta": {
+                "name": "PatientsTileSlot",
+                "title": "Total No of Patients"
+            }
+        },
+            {
+            "name": "no-of-patients-synced-tile-component",
+            "slot": "client-registry-tiles-slot",
+            "component": "totalPatientsSyncedTile",
+            "meta": {
+                "name": "PatientsSyncedTileSlot",
+                "title": "Total No of Patients Synced"
+            }
+        },
+
+
+         {
+            "name": "cr-patient-send-to-cr-button",
+            "component": "sendPatientToCRButton",
+            "slot": "cr-patients-actions-slot"
+        },
+
+                {
+            "name": "send-patient-to-cr-dialog",
+            "component": "sendPatientToCRDialog"
         },
         {
             "name": "health-exchange-app-menu-item",

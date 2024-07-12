@@ -6,6 +6,10 @@ import {
 import { configSchema } from "./config-schema";
 import { createLeftPanelLink } from "./left-panel-link.component";
 import appMenu from "./components/exchange-menu-app/exchange-menu-app-item.component";
+import totalPatientsTileComponent from "./client-registry/client-registry-tiles/client-registry-total-patients-tile.component";
+import totalPatientsSyncedTileComponent from "./client-registry/client-registry-tiles/client-registry-total-patients-synced-tile.component";
+import sendPatientToCRButtonComponent from "./client-registry/client-registry-data/client-registry-actions/send-patient-to-cr-menu-item.component";
+import sendPatientToCRDialogComponent from "./client-registry/client-registry-data/client-registry-dialogs/send-patient-to-cr-dialog.component";
 
 const moduleName = "@ugandaemr/esm-ugandaemr-exchange-app";
 
@@ -76,6 +80,25 @@ export const VLSuppressionPredictionWorkspace = getAsyncLifecycle(
 );
 
 export const healthExchangeAppMenuItem = getSyncLifecycle(appMenu, options);
+
+export const totalPatientsTile = getSyncLifecycle(
+  totalPatientsTileComponent,
+  options
+);
+export const totalPatientsSyncedTile = getSyncLifecycle(
+  totalPatientsSyncedTileComponent,
+  options
+);
+
+export const sendPatientToCRButton = getSyncLifecycle(
+  sendPatientToCRButtonComponent,
+  options
+);
+
+export const sendPatientToCRDialog = getSyncLifecycle(
+  sendPatientToCRDialogComponent,
+  options
+);
 
 export const ChatbotButton = getAsyncLifecycle(
   () => import("./components/workspace/chatbot/chatbot-button.component"),
