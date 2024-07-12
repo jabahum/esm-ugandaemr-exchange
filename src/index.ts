@@ -4,7 +4,6 @@ import {
   defineConfigSchema,
 } from "@openmrs/esm-framework";
 import { configSchema } from "./config-schema";
-import { createDashboardLink } from "./create-dashboard-link.component";
 import { createLeftPanelLink } from "./left-panel-link.component";
 import appMenu from "./components/exchange-menu-app/exchange-menu-app-item.component";
 
@@ -34,6 +33,14 @@ export const fhirProfileLink = getSyncLifecycle(
   createLeftPanelLink({
     name: "fhir-exchange",
     title: "FHIR Profiles",
+  }),
+  options
+);
+
+export const clientRegistryLink = getSyncLifecycle(
+  createLeftPanelLink({
+    name: "client-registry",
+    title: "Client Registry",
   }),
   options
 );
