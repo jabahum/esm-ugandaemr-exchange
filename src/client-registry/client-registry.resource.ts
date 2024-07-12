@@ -129,17 +129,21 @@ export function submitPatient(payload: Payload) {
 }
 
 export function startClientRegistryTask() {
+  const abortController = new AbortController();
   const apiUrl = `${restBaseUrl}/taskaction`;
   const payload = {
     action: "runtask",
-    tasks: ["Send Viral Load Request to Central Server Task"],
+    tasks: ["Client Registry Integration"],
   };
   return openmrsFetch(apiUrl, {
     method: "POST",
-    body: JSON.stringify(payload),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    signal: abortController.signal,
+    body: payload,
   });
 }
-
 
 export function extractErrorMessagesFromResponse(errorObject) {
   const fieldErrors = errorObject?.responseBody?.error?.fieldErrors;
