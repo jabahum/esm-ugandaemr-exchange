@@ -150,7 +150,7 @@ const ClientRegistryData: React.FC = () => {
         </OrderCustomOverflowMenuComponent>
       ),
     }));
-  }, [paginatedPatientEntries]);
+  }, [patients]);
 
   if (loading) {
     return <DataTableSkeleton />;

@@ -2,8 +2,8 @@ import {
   FetchResponse,
   openmrsFetch,
   restBaseUrl,
-  useConfig,
 } from "@openmrs/esm-framework";
+import axios from "axios";
 import useSWR from "swr";
 
 const v =
@@ -117,15 +117,20 @@ export function usePatients(q: string, includeDead: boolean) {
   };
 }
 
-// submit patients to CR
-export function submitPatient(payload: Payload) {
-  const config = useConfig();
-  const { clientRegistryUrl } = config;
-  const apiUrl = `${clientRegistryUrl}/Patient`;
-  return openmrsFetch(apiUrl, {
-    method: "POST",
-    body: JSON.stringify(payload),
-  });
+export async function submitPatient(
+  apiUrl: string,
+  payload: Payload
+): Promise<any> {
+  try {
+    const response = await axios.post(apiUrl, payload, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(`Error in submitPatient: ${error.message}`);
+  }
 }
 
 export function startClientRegistryTask() {

@@ -11,7 +11,11 @@ import {
   Button,
 } from "@carbon/react";
 import { Payload, submitPatient } from "../../client-registry.resource";
-import { showNotification, showSnackbar } from "@openmrs/esm-framework";
+import {
+  showNotification,
+  showSnackbar,
+  useConfig,
+} from "@openmrs/esm-framework";
 
 interface SendPatientToCRDialogProps {
   patientUuid: string;
@@ -24,6 +28,8 @@ const SendPatientToCRDialog: React.FC<SendPatientToCRDialogProps> = ({
   patient,
   closeModal,
 }) => {
+  const { clientRegistryUrl } = useConfig();
+  const apiUrl = `${clientRegistryUrl}/Patient`;
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const [crPatient, setCRPatient] = useState<Payload>();
@@ -32,7 +38,7 @@ const SendPatientToCRDialog: React.FC<SendPatientToCRDialogProps> = ({
     e.preventDefault();
     setIsLoading(true);
     // send patient to CR
-    submitPatient(crPatient).then(
+    submitPatient(apiUrl, crPatient).then(
       () => {
         setIsLoading(false);
         showSnackbar({
