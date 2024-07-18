@@ -4,11 +4,14 @@
         "fhir2": ">=1.2",
         "webservices.rest": "^2.24.0"
     },
-    "pages": [{
-        "component": "root",
-        "route": "health-exchange"
-    }],
-    "extensions": [{
+    "pages": [
+        {
+            "component": "root",
+            "route": "health-exchange"
+        }
+    ],
+    "extensions": [
+        {
             "component": "root",
             "name": "health-exchange-dashboard",
             "slot": "health-exchange-dashboard-slot"
@@ -23,8 +26,8 @@
             "name": "fhir-profile-link",
             "slot": "health-exchange-left-panel-slot"
         },
-              {
-            "component": "clientRegistryLink",
+        {
+            "component": "registriesDashboard",
             "name": "client-registry-link",
             "slot": "health-exchange-left-panel-slot"
         },
@@ -38,13 +41,11 @@
             "component": "VLSuppressionPredictionWorkspace"
         },
         {
-
             "name": "chatbot-button",
             "component": "ChatbotButton",
             "slot": "homepage-widgets-slot"
         },
         {
-
             "component": "toolsModal",
             "name": "tools-modal",
             "online": true,
@@ -61,9 +62,8 @@
             "name": "pepfar-modal",
             "online": true,
             "offline": true
-
         },
-                {
+        {
             "name": "no-of-patients-tile-component",
             "slot": "client-registry-tiles-slot",
             "component": "totalPatientsTile",
@@ -72,7 +72,7 @@
                 "title": "Total No of Patients"
             }
         },
-            {
+        {
             "name": "no-of-patients-synced-tile-component",
             "slot": "client-registry-tiles-slot",
             "component": "totalPatientsSyncedTile",
@@ -81,15 +81,12 @@
                 "title": "Total No of Patients Synced"
             }
         },
-
-
-         {
+        {
             "name": "cr-patient-send-to-cr-button",
             "component": "sendPatientToCRButton",
             "slot": "cr-patients-actions-slot"
         },
-
-                {
+        {
             "name": "send-patient-to-cr-dialog",
             "component": "sendPatientToCRDialog"
         },
@@ -100,7 +97,55 @@
             "meta": {
                 "name": "Health Exchange"
             }
+        },
+        {
+            "name": "client-registry-dashboard",
+            "slot": "hie-registries-slot",
+            "component": "clientRegistryDashboardLink",
+            "meta": {
+                "slot": "client-registry-dashboard-slot",
+                "columns": 1,
+                "path": "client-registry-dashboard",
+                "layoutMode": "anchored"
+            }
+        },
+            {
+            "name": "facility-registry-dashboard",
+            "slot": "hie-registries-slot",
+            "component": "facilityRegistryDashboardLink",
+            "meta": {
+                "slot": "facility-registry-dashboard-slot",
+                "columns": 1,
+                "path": "facility-registry-dashboard",
+                "layoutMode": "anchored"
+            }
+        },
 
+             {
+            "name": "product-registry-dashboard",
+            "slot": "hie-registries-slot",
+            "component": "productRegistryDashboardLink",
+            "meta": {
+                "slot": "product-registry-dashboard-slot",
+                "columns": 1,
+                "path": "product-registry-dashboard",
+                "layoutMode": "anchored"
+            }
+        },
+        {
+            "name": "client-registry-dashboard-ext",
+            "slot": "client-registry-dashboard-slot",
+            "component": "clientRegistry"
+        },
+
+         {
+            "name": "facility-registry-dashboard-ext",
+            "slot": "facility-registry-dashboard-slot",
+            "component": "facilityRegistry"
+        }, {
+            "name": "product-registry-dashboard-ext",
+            "slot": "product-registry-dashboard-slot",
+            "component": "productRegistry"
         },
         {
           "component": "scheduleManagerLink",
