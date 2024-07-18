@@ -15,7 +15,7 @@ export const clientRegistryDashboardMeta = {
 export const facilityRegistryDashboardMeta = {
   slot: "facility-registry-dashboard-slot",
   columns: 1,
-  title: "Facility ",
+  title: "Facility",
   path: "facility-registry-dashboard",
   layoutMode: "anchored",
 };
@@ -23,7 +23,7 @@ export const facilityRegistryDashboardMeta = {
 export const productRegistryDashboardMeta = {
   slot: "product-registry-dashboard-slot",
   columns: 1,
-  title: "Product ",
+  title: "Product",
   path: "product-registry-dashboard",
   layoutMode: "anchored",
 };
