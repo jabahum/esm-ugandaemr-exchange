@@ -18,13 +18,11 @@ import {
 } from "@openmrs/esm-framework";
 
 interface SendPatientToCRDialogProps {
-  patientUuid: string;
   patient: Patient;
   closeModal: () => void;
 }
 
 const SendPatientToCRDialog: React.FC<SendPatientToCRDialogProps> = ({
-  patientUuid,
   patient,
   closeModal,
 }) => {
@@ -32,7 +30,23 @@ const SendPatientToCRDialog: React.FC<SendPatientToCRDialogProps> = ({
   const apiUrl = `${clientRegistryUrl}/Patient`;
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
-  const [crPatient, setCRPatient] = useState<Payload>();
+
+  const crPatient: Payload = {
+    resourceType: "Patient",
+    identifier: [],
+    name: [],
+    telecom: [],
+    maritalStatus: undefined,
+    managingOrganization: undefined,
+    address: [],
+    contact: [],
+    communication: [],
+    extension: [],
+    birthDate: "",
+    deceasedBoolean: false,
+    active: false,
+    gender: "",
+  };
 
   const sendPatientToCR = async (e) => {
     e.preventDefault();

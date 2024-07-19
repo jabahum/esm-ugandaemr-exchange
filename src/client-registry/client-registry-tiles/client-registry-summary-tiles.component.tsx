@@ -9,8 +9,6 @@ import {
 import { ComponentContext } from "@openmrs/esm-framework/src/internal";
 
 const ClientRegistrySummaryTiles: React.FC = () => {
-  const { t } = useTranslation();
-
   const clientRegistryTileSlot = "client-registry-tiles-slot";
 
   const tilesExtensions = useConnectedExtensions(

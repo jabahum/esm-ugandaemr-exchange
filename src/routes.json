@@ -109,7 +109,7 @@
                 "layoutMode": "anchored"
             }
         },
-            {
+        {
             "name": "facility-registry-dashboard",
             "slot": "hie-registries-slot",
             "component": "facilityRegistryDashboardLink",
@@ -120,8 +120,7 @@
                 "layoutMode": "anchored"
             }
         },
-
-             {
+        {
             "name": "product-registry-dashboard",
             "slot": "hie-registries-slot",
             "component": "productRegistryDashboardLink",
@@ -137,12 +136,12 @@
             "slot": "client-registry-dashboard-slot",
             "component": "clientRegistry"
         },
-
-         {
+        {
             "name": "facility-registry-dashboard-ext",
             "slot": "facility-registry-dashboard-slot",
             "component": "facilityRegistry"
-        }, {
+        },
+        {
             "name": "product-registry-dashboard-ext",
             "slot": "product-registry-dashboard-slot",
             "component": "productRegistry"
