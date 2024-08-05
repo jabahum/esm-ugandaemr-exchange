@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   extractErrorMessagesFromResponse,
@@ -37,7 +37,25 @@ const ClientRegistryData: React.FC = () => {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
 
-  const { patients, isLoading: loading, mutate } = usePatients("sarah", false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(searchQuery);
+
+  // Debounce the search input
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery);
+    }, 500);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchQuery]);
+
+  const {
+    patients,
+    isLoading: loading,
+    mutate,
+  } = usePatients(debouncedSearchQuery, false);
 
   const pageSizes = [10, 20, 30, 40, 50];
   const [currentPageSize, setPageSize] = useState(10);
@@ -158,13 +176,29 @@ const ClientRegistryData: React.FC = () => {
 
   return (
     <div style={{ margin: "1rem" }}>
-      <Button
-        style={{ marginLeft: "1rem", marginBottom: "1rem" }}
-        onClick={(e) => startClientRegistry(e)}
-        kind="primary"
+      <div
+        style={{ marginBottom: "1rem", display: "flex", alignItems: "center" }}
       >
-        {isLoading ? <InlineLoading /> : "Send All to CR"}
-      </Button>
+        <input
+          type="text"
+          placeholder="Search patients"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{
+            marginRight: "2rem",
+            marginLeft: "1rem",
+            padding: "0.5rem",
+            flex: "1",
+          }}
+        />
+        <Button
+          style={{ marginLeft: "1rem" }}
+          onClick={(e) => startClientRegistry(e)}
+          kind="primary"
+        >
+          {isLoading ? <InlineLoading /> : "Send All to CR"}
+        </Button>
+      </div>
       <DataTable rows={tableRows} headers={tableHeaders} useZebraStyles>
         {({
           rows,
