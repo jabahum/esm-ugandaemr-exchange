@@ -28,6 +28,7 @@ const Root: React.FC = () => {
         <Routes>
           <Route path="/" element={<FacilityMetrics />} />
           <Route path="/fhir-exchange" element={<Fhir />} />
+          <Route path="/schedule-manager" element={<ScheduleManager />} />
           <Route
             path="/client-registry-dashboard"
             element={<ClientRegistry />}
@@ -40,7 +41,6 @@ const Root: React.FC = () => {
             path="/product-registry-dashboard"
             element={<ProductRegistry />}
           />
-          <Route path="/schedule-manager" element={<ScheduleManager />} />
         </Routes>
       </main>
     </BrowserRouter>
