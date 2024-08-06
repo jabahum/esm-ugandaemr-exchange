@@ -9,6 +9,7 @@ import ClientRegistry from "./client-registry/client-registry.component";
 import FacilityRegistry from "./facility-registry/facility-registry.component";
 import ProductRegistry from "./product-registry/product-registry.component";
 import ScheduleManager from "./scheduler/scheduler.component";
+import SyncTaskTypes from "./fhir/sync-task-types/sync-task-types.component";
 
 const Root: React.FC = () => {
   const spaBasePath = window.spaBase;
@@ -30,6 +31,8 @@ const Root: React.FC = () => {
           <Route path="/facility-metrics" element={<FacilityMetrics />} />
           <Route path="/fhir-exchange" element={<Fhir />} />
           <Route path="/schedule-manager" element={<ScheduleManager />} />
+          <Route path="/sync-task-types" element={<SyncTaskTypes />} />
+
           <Route
             path="/client-registry-dashboard"
             element={<ClientRegistry />}
