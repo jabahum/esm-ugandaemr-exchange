@@ -27,6 +27,7 @@ const Root: React.FC = () => {
       <main className={styles.container}>
         <Routes>
           <Route path="/" element={<FacilityMetrics />} />
+          <Route path="/facility-metrics" element={<FacilityMetrics />} />
           <Route path="/fhir-exchange" element={<Fhir />} />
           <Route path="/schedule-manager" element={<ScheduleManager />} />
           <Route
