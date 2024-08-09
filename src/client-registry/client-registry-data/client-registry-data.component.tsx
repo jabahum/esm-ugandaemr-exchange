@@ -11,7 +11,6 @@ import {
   parseDate,
   showNotification,
   showSnackbar,
-  usePagination,
 } from "@openmrs/esm-framework";
 import {
   DataTable,
@@ -59,11 +58,13 @@ const ClientRegistryData: React.FC = () => {
 
   const pageSizes = [10, 20, 30, 40, 50];
   const [currentPageSize, setPageSize] = useState(10);
-  const {
-    goTo,
-    results: paginatedPatientEntries,
-    currentPage,
-  } = usePagination(patients, currentPageSize);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const paginatedPatientEntries = useMemo(() => {
+    const startIndex = (currentPage - 1) * currentPageSize;
+    const endIndex = startIndex + currentPageSize;
+    return patients?.slice(startIndex, endIndex) || [];
+  }, [patients, currentPage, currentPageSize]);
 
   const tableHeaders = useMemo(
     () => [
@@ -85,42 +86,8 @@ const ClientRegistryData: React.FC = () => {
     [t]
   );
 
-  const startClientRegistry = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    startClientRegistryTask().then(
-      () => {
-        mutate();
-        setIsLoading(false);
-        showSnackbar({
-          isLowContrast: true,
-          title: t("runTask", "Start Client Registry Task"),
-          kind: "success",
-          subtitle: t(
-            "successfullyStarted",
-            `You have successfully started Client Registry`
-          ),
-        });
-      },
-      (error) => {
-        const errorMessages = extractErrorMessagesFromResponse(error);
-
-        mutate();
-        setIsLoading(false);
-        showNotification({
-          title: t(
-            `errorStartingTask', 'Error Starting client registry task"),`
-          ),
-          kind: "error",
-          critical: true,
-          description: errorMessages.join(", "),
-        });
-      }
-    );
-  };
-
   const tableRows = useMemo(() => {
-    return patients?.map((patient, index) => ({
+    return paginatedPatientEntries.map((patient, index) => ({
       ...patient,
       id: patient?.uuid,
       name: patient?.person?.display,
@@ -162,13 +129,54 @@ const ClientRegistryData: React.FC = () => {
         >
           <ExtensionSlot
             className={styles.menuLink}
-            state={{ patient: patients[index] }}
+            state={{ patient: paginatedPatientEntries[index] }}
             name="cr-patients-actions-slot"
           />
         </OrderCustomOverflowMenuComponent>
       ),
     }));
-  }, [patients]);
+  }, [paginatedPatientEntries]);
+
+  const startClientRegistry = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    startClientRegistryTask().then(
+      () => {
+        mutate();
+        setIsLoading(false);
+        showSnackbar({
+          isLowContrast: true,
+          title: t("runTask", "Start Client Registry Task"),
+          kind: "success",
+          subtitle: t(
+            "successfullyStarted",
+            `You have successfully started Client Registry`
+          ),
+        });
+      },
+      (error) => {
+        const errorMessages = extractErrorMessagesFromResponse(error);
+
+        mutate();
+        setIsLoading(false);
+        showNotification({
+          title: t("errorStartingTask", "Error Starting client registry task"),
+          kind: "error",
+          critical: true,
+          description: errorMessages.join(", "),
+        });
+      }
+    );
+  };
+
+  const handlePageChange = ({ pageSize, page }) => {
+    if (pageSize !== currentPageSize) {
+      setPageSize(pageSize);
+      setCurrentPage(1); // Reset to the first page when page size changes
+    } else if (page !== currentPage) {
+      setCurrentPage(page);
+    }
+  };
 
   if (loading) {
     return <DataTableSkeleton />;
@@ -209,7 +217,7 @@ const ClientRegistryData: React.FC = () => {
           getTableContainerProps,
         }) => (
           <TableContainer
-            {...getTableContainerProps}
+            {...getTableContainerProps()}
             className={styles.tableContainer}
           >
             <Table {...getTableProps()} aria-label="patients">
@@ -251,16 +259,9 @@ const ClientRegistryData: React.FC = () => {
               page={currentPage}
               pageSize={currentPageSize}
               pageSizes={pageSizes}
-              totalItems={paginatedPatientEntries?.length}
+              totalItems={patients?.length || 0} // Reflect the total number of patients
               className={styles.pagination}
-              onChange={({ pageSize, page }) => {
-                if (pageSize !== currentPageSize) {
-                  setPageSize(pageSize);
-                }
-                if (page !== currentPage) {
-                  goTo(page);
-                }
-              }}
+              onChange={handlePageChange}
             />
           </TableContainer>
         )}
